@@ -1,0 +1,76 @@
+import { DefaultHomeComponent } from './../../components/bank/default-home/default-home.component';
+import { InnovStartUpSignUpComponent } from './../../components/innovHelp/innov-start-up-sign-up/innov-start-up-sign-up.component';
+import { SavingsCalculatorComponent } from './../../components/portfolio/savings-calculator/savings-calculator.component';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from "../../components/bank/home/home.component";
+import { LoginComponent } from "../../components/bank/login/login.component";
+import { SignupComponent } from "../../components/bank/signup/signup.component";
+import { LandingPageComponent } from "./../../components/bank/landing-page/landing-page.component";
+import { DcComponent } from "../../components/digicheque/dc/dc.component";
+import { PmsComponent } from "../../components/portfolio/pms/pms.component";
+import { InnovHelpComponent } from "../../components/innovHelp/innov-help/innov-help.component";
+import { DcinfoComponent } from "../../components/bank/dcinfo/dcinfo.component";
+import { PmsinfoComponent } from "../../components/bank/pmsinfo/pmsinfo.component";
+import { IhInfoComponent } from "../../components/bank/ih-info/ih-info.component";
+import { InvestorLandingComponent } from "../../components/innovHelp/investor-landing/investor-landing.component";
+import { DigichequeDetailsComponent } from "../../components/digicheque/digicheque-details/digicheque-details.component";
+import { DashboardComponent } from '../../components/bank/dashboard/dashboard.component';
+import { AccountsComponent } from '../../components/bank/accounts/accounts.component';
+import { BeneficiaryFormsComponent } from "../../components/digicheque/beneficiary-forms/beneficiary-forms.component";
+import { DigichequeOtpComponent } from "../../components/digicheque/digicheque-otp/digicheque-otp.component";
+import { DefaultTryComponent } from "../../components/bank/default-try/default-try.component";
+import { PracticeComponent } from "../../components/bank/practice/practice.component";
+
+const app_routes: Routes = [
+  {
+    path: 'home', component: HomeComponent, children: [
+     // { path: '', component: PracticeComponent},
+      // { path: '', component: DefaultHomeComponent},
+      { path: '', component: DefaultTryComponent},
+      { path: 'login', component: LoginComponent },
+
+      { path: 'signup', component: SignupComponent },
+      { path: 'digiCheque', component: DcinfoComponent },
+      { path: 'portfolio', component: PmsinfoComponent },
+      { path: "innovHelp", component: IhInfoComponent },
+      { path: '**', redirectTo: 'home', pathMatch: 'full' }
+    ]
+  },
+  //testing
+  { path:'12345', component: InnovStartUpSignUpComponent},
+  { path:'abcd', component: InvestorLandingComponent},
+  { path:'innovHelp', component:InnovHelpComponent},
+  { path:'landingPage', component:LandingPageComponent,
+    children:[
+      { path:'digicheque', component:DcComponent},
+      { path:'digicheque/digicheque-details',component:DigichequeDetailsComponent},
+      { path:'digicheque/beneficiary-form',component:BeneficiaryFormsComponent},
+      { path:'digicheque/digicheque-otp',component:DigichequeOtpComponent},
+      { path:'portfolio', component:PmsComponent},
+      { path:'dashboard', component:DashboardComponent},
+      { path:'accounts', component:AccountsComponent},
+      { path:'portfolio_savings', component:SavingsCalculatorComponent},
+      { path:'portfolio', component:PmsComponent},
+      { path:'portfolio/:type', component:SavingsCalculatorComponent},
+      { path:'', redirectTo:"dashboard", pathMatch:'full'},
+      { path:'**', redirectTo:"dashboard", pathMatch:'full'}    
+    ]},
+ 
+  
+  { path:'**', redirectTo:'home', pathMatch:'full'},
+  
+  
+]
+@NgModule({
+  imports: [
+    CommonModule,
+    RouterModule.forRoot(app_routes),
+  ],
+  exports: [
+    RouterModule
+  ],
+  declarations: []
+})
+export class AppRoutingModule { }

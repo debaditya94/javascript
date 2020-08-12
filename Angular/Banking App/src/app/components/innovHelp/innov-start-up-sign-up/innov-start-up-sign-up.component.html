@@ -1,0 +1,151 @@
+<div class="center">
+    <div class="inner">
+        <div class="backtohome">
+            <i class="fa fa-arrow-left fa-2x" aria-hidden="true" (click)="backtohome()"></i>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-8">
+                    <mat-card>
+                        <mat-horizontal-stepper [linear]="isLinear">
+
+                            <mat-step [stepControl]="basicDetailsForm">
+                                <form [formGroup]="basicDetailsForm">
+                                    <ng-template matStepLabel>Basic Details</ng-template>
+                                    <div class="form-container">
+                                        <mat-form-field>
+                                            <input matInput placeholder="Name your StartUp" formControlName="name" required>
+                                        </mat-form-field>
+                                        <mat-form-field>
+                                            <input matInput placeholder="Location" formControlName="location" required>
+                                        </mat-form-field>
+                                        <mat-form-field>
+                                            <textarea matInput placeholder="Small Description" formControlName="s_description"></textarea>
+                                        </mat-form-field>
+                                        <mat-form-field>
+                                            <input type="text" #websiteInput (change)="isWebsiteValid(websiteInput)" matInput id="website" placeholder="Website" name="website" formControlName="website" required>
+                                        </mat-form-field>
+                                        <p class="help-block" *ngIf="isWebsitebool">Please enter a valid url</p>
+                                        <mat-form-field>
+                                            <mat-select placeholder="Your Account" formControlName="primary_acc" required>
+                                                <mat-option *ngFor="let account of accounts" [value]="account">
+                                                    {{ account }}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <div class="form-group">
+                                            <label>StartUp Logo</label>
+                                            <input id="file" #fileinput (change)="isFileChange(fileinput)" class="form-control" name="file" type="file">
+                                            <p *ngIf="!isFile" class="help-block">{{isFileErrorMsg}}</p>
+                                        </div>
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperNext (click)="StartUpBasicDetails()" [disabled]="!isFile || basicDetailsForm.invalid ">Save and Next</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </mat-step>
+
+                            <mat-step [stepControl]="startupDetailsForm">
+                                <form [formGroup]="startupDetailsForm">
+                                    <div class="form-container">
+                                        <ng-template matStepLabel>StartUp Details</ng-template>
+                                        <mat-form-field>
+                                            <textarea matInput placeholder="Descibe your idea" formControlName="l_description" required></textarea>
+                                        </mat-form-field>
+                                        <mat-form-field>
+                                                <span matPrefix>&#x20B9;</span><input type="tel" matInput placeholder="Equity Offered" formControlName="equity_offered" maxlength="2"  required><span matSuffix>%</span>
+                                        </mat-form-field>
+                                        <mat-form-field>
+                                                <span matPrefix>&#x20B9;</span><input type="tel" matInput placeholder="Total Investments till date" formControlName="investment_amount" maxlength="10" required>
+                                        </mat-form-field>
+                                        <mat-form-field>
+                                                <span matPrefix>&#x20B9;</span><input type="tel" matInput placeholder="Investment Sought" formControlName="investment_sought" maxlength="10" required>
+                                        </mat-form-field>
+                                        <mat-form-field>
+                                                <span matPrefix>&#x20B9;</span><input type="tel" matInput placeholder="Valuation" formControlName="valuation" maxlength="10" required>
+                                        </mat-form-field>
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+                                            <button mat-raised-button color="primary" matStepperNext (click)="startupDetails()">Save and Next</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </mat-step>
+
+                            <mat-step [stepControl]="teamDetailsForm">
+                                <form [formGroup]="teamDetailsForm">
+
+                                    <div formArrayName="team">
+                                        <div class="flex">
+                                            <div *ngFor="let teams of teamDetailsForm.get('team').controls; let i=index">
+                                                <div [formGroupName]="i">
+                                                    <ng-template matStepLabel>Team Details</ng-template>
+                                                    <mat-card class="example-card">
+                                                        <mat-card-header class="teamMemberHeader">
+                                                            <mat-card-title>
+                                                                <h4>Member {{i+1}}</h4>
+                                                            </mat-card-title>
+                                                            <i *ngIf="i!=0" class="fa fa-trash-o" aria-hidden="true" (click)="removeMemberForm(i)"></i>
+                                                        </mat-card-header>
+
+
+                                                        <mat-card-content>
+                                                            <mat-form-field>
+                                                                <input matInput placeholder="Name" formControlName="name" #nameinput (change)="isNameValid(nameinput,i)" required>
+                                                            </mat-form-field>
+                                                            <p class="help-block" *ngIf="isNamebool[i]">Name can only contain Alphabets</p>
+                                                            <mat-form-field>
+                                                                <input matInput #designationInput (change)="isDesignationValid(designationInput,i)" placeholder="Designation" formControlName="designation" required>
+                                                            </mat-form-field>
+                                                            <p class="help-block" *ngIf="isDesignationbool[i]">Designation can only contain Alphabets</p>
+                                                            <mat-form-field>
+                                                                <input matInput #emailinput (change)="isEmailValid(emailinput,i)" placeholder="Email" formControlName="email" type="text" >
+                                                            </mat-form-field>
+                                                            <p class="help-block" *ngIf="isEmailbool[i]">Please enter a valid email</p>
+                                                            <mat-form-field>
+                                                                <input type="tel" matInput placeholder="Contact No." formControlName="phone_no" maxlength="10" minlength="8" required>
+
+                                                            </mat-form-field>
+                                                        </mat-card-content>
+                                                    </mat-card>
+
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <button mat-mini-fab color="primary" (click)="AddteamFrom()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                                            </div>
+                                        </div>
+
+
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+                                            <button mat-raised-button color="primary" matStepperNext (click)="teamDetails()" [disabled]="teamDetailsForm.invalid || isTeamFormDesignationValid || isTeamFormEmailValid || isTeamFormNameValid">Save and Next</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </mat-step>
+
+                            <mat-step>
+                                <ng-template matStepLabel>Done</ng-template>
+                                <div class="form-container">
+                                    You are now done.
+                                    <div>
+                                        <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+                                        <button mat-raised-button color="primary" (click)="StratUp()">Submit</button>
+                                    </div>
+                                </div>
+                            </mat-step>
+
+                        </mat-horizontal-stepper>
+                    </mat-card>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

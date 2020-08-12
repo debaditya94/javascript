@@ -1,0 +1,65 @@
+<!-- <app-innov-help-header *ngIf="investor" [investor]="investor"></app-innov-help-header>
+<div *ngIf="investor">
+
+  <div class="col-md-2 col-sm-2 col-xs-12" *ngIf="investor">
+    <mat-card>
+      <mat-card-content>
+        <div class="row" style="text-align:center">
+          <img src="{{investor.profilePic}}" alt="{{investor.name}}" width="75%" height="75%" style="border-radius:75%;object-fit:cover;border:5px solid rgb(247,247,247);">
+          <h3>{{investor.profile_key}}</h3>
+        </div>
+        <br>
+        <div class="row">
+          <ul class="list-group">
+            <a class="list-group-item" routerLink="/investorLanding/startupList">List Startups</a>
+            <a class="list-group-item" [routerLink]="['/investorLanding','pitchedStartups']">Startups Interested in Me</a>
+            <a class="list-group-item" [routerLink]="['/investorLanding','myInvestments']">My investments</a>
+            <a class="list-group-item">Edit My Profile </a>
+            <a class="list-group-item" [routerLink]="['/landingPage']">Banking Services </a>
+            <a class="list-group-item" (click)="logoutInvestor()">Logout</a>
+          </ul>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="col-md-10 col-sm-10 col-xs-12">
+    <router-outlet></router-outlet>
+  </div>
+
+</div> -->
+<!-- 
+
+<div *ngIf="!investor" class="flex">
+  <div id="flex2">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    <h4>Loading interesting startups for you.....</h4>
+  </div>
+</div>
+ -->
+
+
+
+<div class="entirePage">
+  <div class="leftSideBar">
+    <img class="profileImage" src={{investor?.profilePic}}>
+    <h4 id="startupname">{{investor?.name}}</h4>
+
+    <div class="breakLine"></div>
+    <div class="flex-column">
+      <ul class="sidebaroptions">
+        <li routerLinkActive="activeLink" routerLink="/investorLanding/startupList">List Startups</li>
+        <li routerLinkActive="activeLink" [routerLink]="['/investorLanding','pitchedStartups']">Followers</li>
+        <li routerLinkActive="activeLink" [routerLink]="['/investorLanding','myInvestments']">My investments</li>
+        <li routerLinkActive="activeLink" [routerLink]="['/landingPage']">Banking Services </li>
+      </ul>
+    </div>
+  </div>
+  <div class="mainContent">
+    <app-innov-help-header></app-innov-help-header>
+    <mat-progress-bar *ngIf="progress" [color]="color" [mode]="mode">
+    </mat-progress-bar>
+    <router-outlet></router-outlet>
+
+  </div>
+</div>

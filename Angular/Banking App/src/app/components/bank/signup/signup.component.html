@@ -1,0 +1,97 @@
+<div id="flex1">
+	<div class="backtohome">
+		<i class="fa fa-arrow-left fa-2x" aria-hidden="true" (click)="backtohome()"></i>
+	</div>
+	<mat-card class="card1">
+		<form [formGroup]="userForm" #myForm="ngForm">
+			<h2>Open Account</h2>
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-6">
+					<mat-form-field>
+						<input type="text" matInput placeholder="First name" id="first_name" name="first_name" formControlName="first_name">
+						<mat-error *ngIf="userForm.get('first_name')?.touched && userForm.get('first_name')?.invalid">First name is required!
+						</mat-error>
+					</mat-form-field>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-6">
+					<mat-form-field>
+						<input type="text" matInput placeholder="Last name" id="last_name" name="last_name" formControlName="last_name">
+						<mat-error *ngIf="userForm.get('last_name')?.touched && userForm.get('last_name')?.invalid">Last name is required!
+						</mat-error>
+					</mat-form-field>
+				</div>
+			</div>
+			<mat-form-field class="fullWidth">
+				<input type="email" matInput placeholder="Email" id="email" name="email" formControlName="email">
+				<mat-error *ngIf="userForm.get('email')?.touched && (userForm.get('email')?.invalid || userForm.get('email')?.errors?.emailcom)">A valid email is required!
+				</mat-error>
+			</mat-form-field>
+
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-6">
+					<mat-form-field class="example-full-width">
+						<input matInput name="dob" [matDatepicker]="picker" placeholder="Date of Birth(MM/DD/YYYY)" id="dob" formControlName="dob">
+						<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+						<mat-datepicker touchUi="true" #picker></mat-datepicker>
+						<mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+					</mat-form-field>
+
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-6">
+					<mat-form-field>
+						<mat-select placeholder="Gender*" name="gender" formControlName="gender">
+							<mat-option *ngFor="let gender of genders" [value]="gender.value">
+								{{ gender.value }}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</div>
+			</div>
+			<div>
+				<mat-form-field>
+					<input type="number" matInput placeholder="Mobile number" id="mobile_number" name="mobile_number" formControlName="mobile_number">
+					<mat-error *ngIf="userForm.get('mobile_number')?.touched && userForm.get('mobile_number')?.invalid">Mobile number is required!
+					</mat-error>
+				</mat-form-field>
+			</div>
+			<div>
+				<mat-form-field>
+					<input type="text" matInput placeholder="Username" id="user_name" name="user_name" formControlName="user_name">
+					<mat-error *ngIf="userForm.get('user_name')?.touched && userForm.get('user_name')?.invalid">Username is required!
+					</mat-error>
+				</mat-form-field>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-6">
+					<div>
+						<mat-form-field>
+							<input type="password" matInput placeholder="Password" id="password" name="password" formControlName="password">
+							<mat-error *ngIf="userForm.get('password')?.touched && userForm.get('password')?.invalid ">Password is required!
+							</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-6">
+					<div>
+						<mat-form-field>
+							<input type="password" (change)="checkPassword()" matInput placeholder="Confirm password" id="confirm_password" name="confirm_password"
+							 formControlName="confirm_password">
+							<mat-error *ngIf="userForm.get('confirm_password')?.touched && userForm.get('confirm_password')?.invalid ">Password is required!
+							</mat-error>
+						</mat-form-field>
+						<p class="help-block" *ngIf="isPassword">Password should match!</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="checkbox">
+				<mat-checkbox formControlName="agreementRead" id="agreementRead" name="agreementRead">I have read <a>Terms and Conditions</a></mat-checkbox>
+			</div>
+			<div class="row">
+				<div style="text-align:center" class="form-group">
+					<button type="submit" [disabled]="myForm.invalid || isPassword" (click)="signUpFnc(myForm)" class="btn btn-primary" tabindex="11">Register</button>
+				</div>
+			</div>
+		</form>
+	</mat-card>
+</div>

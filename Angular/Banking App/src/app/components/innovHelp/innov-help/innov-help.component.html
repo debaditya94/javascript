@@ -1,0 +1,12 @@
+<div class="outer">
+    <span>Innov-Help</span>
+    <div class="inner">
+        <span> Enter as </span>
+        <button class="enter start investor" (click)="investorClicked()">Investor</button>
+        <button class="enter start" (click)="startupClicked()">StartUp</button>
+    </div>
+</div>
+<mat-progress-bar *ngIf="!progressbarVisible" [color]="color" [mode]="mode" [value]="value" [bufferValue]="bufferValue">
+</mat-progress-bar>
+<img class="main" src="./../../../../assets/icons/cr.jpg">
+<app-footer></app-footer>

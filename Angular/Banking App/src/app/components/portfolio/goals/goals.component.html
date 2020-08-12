@@ -1,0 +1,209 @@
+<div class="card">
+  <mat-tab-group>
+    <mat-tab label="Savings Goal">
+      <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4 col-sm-4">
+          <mat-card>
+            <form [formGroup]="savingsForm">
+              <div class="form-group">
+                <label for="financialGoal">What is your financial goal?
+                </label>
+                <input type="string" class="form-control" id="financialGoal" formControlName="financialGoal">
+                <span *ngIf="savingsForm.get('financialGoal').touched && savingsForm.get('financialGoal').errors?.goal">Please select from below goals only</span>
+                <div class="flex">
+                  <div *ngFor="let goal of goals" class="option" (click)="savingsForm.controls['financialGoal'].setValue(goal)"><a>{{goal}}</a></div>
+                </div>
+                <br>
+                <label for="savingsGoal">How much do you want to save?
+                </label>
+                <input type="number" class="form-control" id="savingsGoal" formControlName="savingsGoal">
+                <span *ngIf="savingsForm.get('savingsGoal').touched && savingsForm.get('savingsGoal').errors?.required">Required</span>
+                <span *ngIf="savingsForm.get('savingsGoal').touched && savingsForm.get('savingsGoal').errors?.invalid && !savingsForm.get('savingsGoal').errors?.required">Please enter a valid value</span>
+                <br>
+                <label for="currentSavings">How much have you saved now?
+                </label>
+                <input type="number" class="form-control" id="currentSavings" formControlName="currentSavings">
+                <br>
+                <label for="annualInterest">Annual Interest
+                </label>
+                <input type="number" class="form-control" id="annualInterest" formControlName="annualInterest">
+                <span *ngIf="savingsForm.get('annualInterest').touched && savingsForm.get('annualInterest').errors?.required">Required</span>
+                <span *ngIf="savingsForm.get('annualInterest').touched && savingsForm.get('annualInterest').errors?.invalid && !savingsForm.get('annualInterest').errors?.required">Please enter a valid value</span>
+                <br>
+                <label for="numberOfYears">How many years do you have in which to save it?
+                </label>
+                <input type="number" class="form-control" id="numberOfYears" formControlName="numberOfYears">
+                <span *ngIf="savingsForm.get('numberOfYears').touched && savingsForm.get('numberOfYears').errors?.required">Required</span>
+                <span *ngIf="savingsForm.get('numberOfYears').touched && savingsForm.get('numberOfYears').errors?.invalid && !savingsForm.get('numberOfYears').errors?.required">Please enter a valid value</span>
+                <br>
+                <label for="compounding">Compounding
+                </label>
+                <select class="form-control" id="compounding" formControlName="compounding">
+                  <option>Monthly</option>
+                  <option>Quarterly</option>
+                  <option>Half-yearly</option>
+                  <option>Yearly</option>
+                </select>
+                <span *ngIf="savingsForm.get('compounding').touched && savingsForm.get('compounding').errors?.required">Please select any value</span>
+              </div>
+  
+              <button type="button" class="btn btn-primary" (click)="submitForm(savingsForm)" [disabled]="savingsForm.invalid">Calculate</button>&nbsp;&nbsp;&nbsp;
+              <button type="button" class="btn btn-warning" (click)="savingsForm.reset()">Clear</button>
+            </form>
+          </mat-card>
+        </div>
+        <div class="col-md-8 col-sm-8">
+          <div *ngIf="emi">
+            <div id="button">
+              <button class="btn btn-success" (click)="addGoal(savingsForm)">Add to 2 list</button>
+            </div>
+            <div class="alert bg-primary">
+              To achieve your goal of saving &#8377;{{form.savingsGoal}} in {{form.numberOfYears}} years at an annual interest of {{form.annualInterest}}%,
+              each month you need to invest <strong>&#8377;{{emi}}</strong>
+            </div>
+          </div>
+            <div id="chart1" class="demo-chart"></div>
+        </div>
+      </div>
+    </div>
+    </mat-tab>
+    <mat-tab label="Savings Estimator">
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 col-sm-4">
+                <mat-card>
+                  <form [formGroup]="savingsEstimator">
+                    <div class="form-group">
+                      <label for="financialGoal">What is your financial goal?
+                      </label>
+                      <input type="string" class="form-control" id="financialGoal" formControlName="financialGoal">
+                      <span *ngIf="savingsEstimator.get('financialGoal').touched && savingsEstimator.get('financialGoal').errors?.goal">Please select from below goals only</span>
+                      <div class="flex">
+                        <div *ngFor="let goal of goals" class="option" (click)="savingsEstimator.controls['financialGoal'].setValue(goal)"><a>{{goal}}</a></div>
+                      </div>
+                      <br>
+                      <label for="currentSavings">How much have you saved now?
+                      </label>
+                      <input type="number" class="form-control" id="currentSavings" formControlName="currentSavings">
+                      <br>
+                      <label for="monthlyInvestment">How much do you want to invest monthly?
+                      </label>
+                      <input type="number" class="form-control" id="monthlyInvestment" formControlName="monthlyInvestment">
+                      <span *ngIf="savingsEstimator.get('monthlyInvestment').touched && savingsEstimator.get('monthlyInvestment').errors?.required">Required</span>
+                      <span *ngIf="savingsEstimator.get('monthlyInvestment').touched && savingsEstimator.get('monthlyInvestment').errors?.invalid && !savingsEstimator.get('monthlyInvestment').errors?.required">Please enter a valid value</span>
+                      <br>
+                      <label for="annualInterest">Annual Interest
+                      </label>
+                      <input type="number" class="form-control" id="annualInterest" formControlName="annualInterest">
+                      <span *ngIf="savingsEstimator.get('annualInterest').touched && savingsEstimator.get('annualInterest').errors?.required">Required</span>
+                      <span *ngIf="savingsEstimator.get('annualInterest').touched && savingsEstimator.get('annualInterest').errors?.invalid && !savingsEstimator.get('annualInterest').errors?.required">Please enter a valid value</span>
+                      <br>
+                      <label for="numberOfYears">How many years do you have in which to save it?
+                      </label>
+                      <input type="number" class="form-control" id="numberOfYears" formControlName="numberOfYears">
+                      <span *ngIf="savingsEstimator.get('numberOfYears').touched && savingsEstimator.get('numberOfYears').errors?.required">Required</span>
+                      <span *ngIf="savingsEstimator.get('numberOfYears').touched && savingsEstimator.get('numberOfYears').errors?.invalid && !savingsEstimator.get('numberOfYears').errors?.required">Please enter a valid value</span>
+                      <br>
+                      <label for="compounding">Compounding
+                      </label>
+                      <select class="form-control" id="compounding" formControlName="compounding">
+                        <option>Monthly</option>
+                        <option>Quarterly</option>
+                        <option>Half-yearly</option>
+                        <option>Yearly</option>
+                      </select>
+                      <span *ngIf="savingsEstimator.get('compounding').touched && savingsEstimator.get('compounding').errors?.required">Please select any value</span>
+                    </div>
+        
+                    <button type="button" class="btn btn-primary" (click)="submitSavingsEstimator(savingsEstimator)" [disabled]="savingsEstimator.invalid">Calculate</button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-warning" (click)="savingsEstimator.reset()">Clear</button>
+                  </form>
+                </mat-card>
+              </div>
+        
+              <div class="col-md-8 col-sm-8">
+                <div *ngIf="total_savings">
+                  <div id="button">
+                    <button class="btn btn-success" (click)="addGoal(savingsEstimator)">Add to Goals list</button>
+                  </div>
+                  <div class="alert bg-primary">
+                    With a monthly investment of &#8377;{{form.monthlyInvestment}} for {{form.numberOfYears}} years at an annual interest rate
+                    of {{form.annualInterest}}%, you will save <strong>&#8377;{{total_savings}}</strong>
+                  </div>
+                </div>
+                <div id="chart1" class="demo-chart"></div>
+              </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Time To Achieve Goal">
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 col-sm-4">
+                <mat-card>
+                  <form [formGroup]="timeEstimator">
+                    <div class="form-group">
+                      <label for="financialGoal">What is your financial goal?
+                      </label>
+                      <input type="string" class="form-control" id="financialGoal" formControlName="financialGoal">
+                      <span *ngIf="timeEstimator.get('financialGoal').touched && timeEstimator.get('financialGoal').errors?.goal">Please select from below goals only</span>
+                      <div class="flex">
+                        <div *ngFor="let goal of goals" class="option" (click)="timeEstimator.controls['financialGoal'].setValue(goal)"><a>{{goal}}</a></div>
+                      </div>
+                      <br>
+                      <label for="savingsGoal">How much do you want to save?
+                      </label>
+                      <input type="number" class="form-control" id="savingsGoal" formControlName="savingsGoal">
+                      <span *ngIf="timeEstimator.get('savingsGoal').touched && timeEstimator.get('savingsGoal').errors?.required">Required</span>
+                      <span *ngIf="timeEstimator.get('savingsGoal').touched && timeEstimator.get('savingsGoal').errors?.invalid && !timeEstimator.get('savingsGoal').errors?.required">Please enter a valid value</span>
+                      <br>
+                      <label for="currentSavings">How much have you saved now?
+                      </label>
+                      <input type="number" class="form-control" id="currentSavings" formControlName="currentSavings">
+                      <br>
+                      <label for="monthlyInvestment">How much do you want to invest monthly?
+                      </label>
+                      <input type="number" class="form-control" id="monthlyInvestment" formControlName="monthlyInvestment">
+                      <span *ngIf="timeEstimator.get('monthlyInvestment').touched && timeEstimator.get('monthlyInvestment').errors?.required">Required</span>
+                      <span *ngIf="timeEstimator.get('monthlyInvestment').touched && timeEstimator.get('monthlyInvestment').errors?.invalid && !timeEstimator.get('monthlyInvestment').errors?.required">Please enter a valid value</span>
+                      <br>
+                      <label for="annualInterest">Annual Interest
+                      </label>
+                      <input type="number" class="form-control" id="annualInterest" formControlName="annualInterest">
+                      <span *ngIf="timeEstimator.get('annualInterest').touched && timeEstimator.get('annualInterest').errors?.required">Required</span>
+                      <span *ngIf="timeEstimator.get('annualInterest').touched && timeEstimator.get('annualInterest').errors?.invalid && !timeEstimator.get('annualInterest').errors?.required">Please enter a valid value</span>
+                      <br>
+                      <label for="compounding">Compounding
+                      </label>
+                      <select class="form-control" id="compounding" formControlName="compounding">
+                        <option>Monthly</option>
+                        <option>Quarterly</option>
+                        <option>Half-yearly</option>
+                        <option>Yearly</option>
+                      </select>
+                      <span *ngIf="timeEstimator.get('compounding').touched && timeEstimator.get('compounding').errors?.required">Please select any value</span>
+                    </div>
+        
+                    <button type="button" class="btn btn-primary" (click)="submitGoalTime(timeEstimator)" [disabled]="timeEstimator.invalid">Calculate</button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-warning" (click)="timeEstimator.reset()">Clear</button>
+                  </form>
+                </mat-card>
+              </div>
+              <div class="col-md-8 col-sm-8">
+                <div *ngIf="years">
+                  <div id="button">
+                    <button class="btn btn-success" (click)="addGoal(timeEstimator)">Add to Goals list</button>
+                  </div>
+                  <div class="alert bg-primary">
+                    To achieve your goal of &#8377;{{form.savingsGoal}} with monthly investment of &#8377;{{form.monthlyInvestment}} at an annual
+                    interest rate of {{form.annualInterest}}%, you need to invest for <strong>&#8377;{{years}} years {{months}} months</strong>
+                  </div>
+                </div>
+                <div id="chart1" class="demo-chart"></div>
+              </div>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

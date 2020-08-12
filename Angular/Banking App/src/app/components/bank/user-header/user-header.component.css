@@ -1,0 +1,21 @@
+.header{
+    min-height:60px;
+    background-color:#fff;
+    background-color: #19273d;
+    /* background: linear-gradient(45deg, #0f4c5c, #03323E); */
+    padding:15px;
+    position: fixed;
+    width:100%;
+    z-index:4;
+    text-align: right;
+    color:white;
+}
+#greetings{
+    margin-top:0;
+}
+
+.btn{
+    background-color: #f1f7ed;
+    color:#001a33;
+    margin-left:30px; 
+}

@@ -1,0 +1,67 @@
+<!-- <div *ngFor="let startup of startups" class="startup-card">
+    <div>
+        <mat-card>
+      <div class="row" class="startup-card-header">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          
+            <div class="col-md-8 col-sm-8 col-xs-12">
+                <a (click)="showDetails(startup)"><h3>{{startup.name}}</h3></a>
+            </div>
+            <div class="col-md-2 col-sm-2 col-xs-12 col-md-offset-2">
+                <img src="{{startup.logoUrl}}"
+                alt="{{startup.name}}">
+            </div>
+        </div>
+      </div>
+
+        <div class="row" class="startup-card-content"> 
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <p>{{startup.s_description}}</p>
+            </div>
+        </div>
+
+          <div class="row startup-card-footer">
+              <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-6 " >
+                  
+                  <div class="col-md-4 col-sm-4 col-xs-12 col-md-offset-8 col-sm-offset-8">
+                      <button class="btn btn-success" (click)=investInStartup(startup) [routerLink] = "['/investorLanding','investment']">Invest</button>
+                      
+                  </div>
+                </div>
+          </div>
+        </mat-card>
+      </div>
+
+</div> -->
+<div class="">
+    <div class="">
+        <div *ngFor="let startup of startups">
+            <div class="col-md-3 col-sm-4 col-xs-6 some">
+                <mat-card class="grid-card" (click)="showDetails(startup)">
+                    <div>
+                        <div class="grid-card-header">
+                            <img src="{{startup.logoUrl}}" alt="">
+
+                            <h3 style="text-align:center">{{startup.name}}</h3>
+
+                        </div>
+
+                        <div class="grid-card-description">
+                            <p>{{startup.s_description}}</p>
+                            <span>...</span>
+                        </div>
+
+                        <div>
+                            <!-- <button mat-raised-button color="accent" *ngIf="startup && followingStartups && (followingStartups.indexOf(startup['$key']) >= 0)"(click)="followUnfollow(startup,false)" class="grid-card-btn">Unfollow</button>    -->
+                            <!-- <button mat-raised-button color="accent" *ngIf="startup && followingStartups && (followingStartups.indexOf(startup['$key']) < 0)"(click)="followUnfollow(startup,true)" class="grid-card-btn">Follow</button>    -->
+                            <button mat-raised-button (click)=investInStartup(startup) [routerLink]="['/investorLanding','investment']"
+                                class="grid-card-btn">Invest</button>
+                        </div>
+                    </div>
+
+                </mat-card>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,119 @@
+<div class="" *ngIf="startup">
+  <div class="row">
+    <div class="col-md-8 col-sm-8 col-xs-12">
+      <mat-card class="startup-details-card crd" *ngIf="startup">
+        <mat-card-header>
+          <div class="startup-details-img">
+            <img src="{{startup.logoUrl}}" alt="{{startup.name}}">&nbsp;&nbsp;&nbsp;
+            <div style="margin-right:20%">
+              <h3 style="display:inline-block">{{startup.name}}</h3>
+
+              <p>
+                <i class="fa fa-map-marker" aria-hidden="true"></i> {{startup.location}}
+                <br>
+                <i class="fa fa-globe" aria-hidden="true"></i>
+                <a href="{{startup.website}}">{{startup.website}}</a>
+              </p>
+              <p>
+
+              </p>
+
+            </div>
+          </div>
+        </mat-card-header>
+        <p class="desc">
+          {{startup.s_description}}
+        </p>
+        <mat-card-content>
+        </mat-card-content>
+
+      </mat-card>
+    </div>
+
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <mat-card style="padding:5% 0% 0% 0%;">
+
+        <mat-card-content>
+          <div style="padding:4%;">
+              <div class="row">
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <p>Investment Sought : <strong>{{startup.investment_sought}}</strong></p>
+                  </div>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <p>Investment Amount : <strong>{{startup.investment_amount}}</strong></p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <p>Equity : <strong>{{startup.equity_offered}}</strong></p>
+                  </div>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <p>Valutation : <strong>{{startup.valuation}}</strong></p>
+                  </div>
+                </div>
+          </div>
+          
+          <button mat-raised-button class="bton" (click)=investInStartup(startup) style="width:100%;margin:5% 0% 0% 0%;padding:5%">Invest</button>
+
+          <div id="chart2" class="demo-chart" [hidden]="true"></div>
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="startup">
+  <h3 class="sec-header">Product</h3>
+  <mat-card class="startup-product-card crd">
+    <mat-card-header>
+
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{startup.l_description}}</p>
+
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+<h3 class="sec-header">Fundings</h3>
+<mat-card class="startup-funding-card crd">
+  <mat-card-header>
+  </mat-card-header>
+  <mat-card-content>
+    <div [hidden]="startupInvestments.length <= 0">
+      <div id="chart1" class="demo-chart"></div>
+    </div>
+    <div [hidden]="startupInvestments.length > 0">
+      <h3 class="sec-header">Be the First one to invest in Us!</h3>
+    </div>
+
+  </mat-card-content>
+</mat-card>
+
+
+
+
+<div *ngIf="startup">
+  <h3 class="sec-header">Team</h3>
+  <div *ngFor="let member of startup.team">
+    <div class="col-md-4 col-sm-4 col-xs-12" style="padding : 2% 0% 2% 0%;">
+      <mat-card class="crd">
+        <div class="founder-flex">
+          <img *ngIf="member.imageUrl" src="{{member.imageUrl}}" alt="avatar">
+          <img *ngIf="!member.imageUrl" src="https://lawfarm.in/assets/default-avatar-25d12326da7a8a5adc9a191e63d512e3c8345d1ab03eacbf9a89f24f2ce7f1c6.png"
+            alt="avatar">
+          <div class="founder-flex-details">
+            <p><i class="fa fa-user-circle" aria-hidden="true"></i> {{member.name}}</p>
+            <p>{{member.designation}}</p>
+            <p><i class="fa fa-envelope" aria-hidden="true"></i> {{member.email}}</p>
+            <p><i class="fa fa-address-book" aria-hidden="true"></i> {{member.contact_no}}</p>
+          </div>
+        </div>
+      </mat-card>
+
+    </div>
+  </div>
+
+</div>

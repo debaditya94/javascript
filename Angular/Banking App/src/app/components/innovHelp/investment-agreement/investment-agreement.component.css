@@ -1,0 +1,79 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .example-container > * {
+    width: 100%;
+    
+  }
+
+  .flex{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width:100%;
+    text-align: center;
+  }
+
+  body{
+    width: 50%;
+    max-width: 250px;
+    margin: 0 auto;
+}
+.circ{
+    opacity: 0;
+    stroke-dasharray: 130;
+    stroke-dashoffset: 130;
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    -ms-transition: all 1s;
+    -o-transition: all 1s;
+    transition: all 1s;
+}
+.tick{
+    stroke-dasharray: 50;
+    stroke-dashoffset: 50;
+    -webkit-transition: stroke-dashoffset 1s 0.5s ease-out;
+    -moz-transition: stroke-dashoffset 1s 0.5s ease-out;
+    -ms-transition: stroke-dashoffset 1s 0.5s ease-out;
+    -o-transition: stroke-dashoffset 1s 0.5s ease-out;
+    transition: stroke-dashoffset 1s 0.5s ease-out;
+}
+.drawn + svg .path{
+    opacity: 1;
+    stroke-dashoffset: 0;
+}
+
+#flex{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  
+}
+
+.entire{
+  display: flex;
+  padding:30px;
+  justify-content:center;
+}
+
+.logo{
+  height: 220px;
+  object-fit: cover;
+  object-position: center;
+  width: 300px;
+  border-radius: 6px;
+  margin-top: -40px;
+  box-shadow: 0 10px 60px -15px #9b92a6;
+}
+
+.example-card{
+  width:45vw;
+}
+
+a{
+  color:#999;
+}

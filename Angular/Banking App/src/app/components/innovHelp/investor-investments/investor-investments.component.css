@@ -1,0 +1,31 @@
+.investment-card{
+    background: linear-gradient(90deg, #E54D65,#E8786E);
+    margin: 2%;
+    color: white;
+}
+.investment-card-name{
+    text-align: center;
+    text-overflow: ellipsis;
+    font-size: 20px;    
+    height : auto;
+    
+    
+}
+.investment-card-amount{
+    text-align: left;
+    font-size: 25px;
+}
+.investment-card-equity{
+    text-align: left;
+    font-size: 15px;
+    margin-top: -8%
+}
+.investment-card-date{
+    text-align: end;
+    font-size: 12px;
+}
+
+.investment-card-id{
+    text-align: end;
+    font-size: 12px;
+}

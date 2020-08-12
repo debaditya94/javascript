@@ -1,0 +1,60 @@
+
+
+<div id="flex1">
+    <div class="backtohome">
+        <i class="fa fa-arrow-left fa-2x" aria-hidden="true" (click)="backtohome()"></i>
+    </div>
+    
+
+  <div class="well">
+
+    <div class="progressbar" #progress>
+      <mat-progress-bar [color]="color" [mode]="mode" [value]="value" [bufferValue]="bufferValue">
+      </mat-progress-bar>
+    </div>
+    <div class="padding">
+      <div class="buttons-extremes">
+        <div>
+          <h3 id="justbankLogo"> JustBank</h3>
+          <h4>{{subheading}}</h4>
+          <h6>{{subsubheading}}</h6>
+        </div>
+        <div *ngIf="usernameAvailable">
+          <button mat-mini-fab (click)="backClicked(progress)"><i class="fa fa-caret-left" aria-hidden="true"></i></button>
+        </div>
+      </div>
+
+      <form class="form-horizontal" action="">
+        <div *ngIf="!usernameAvailable">
+          <mat-form-field>
+            <input matInput placeholder="Username" name="username" [(ngModel)]="username" (click)="inputClicked()">
+          </mat-form-field>
+          
+        </div>
+
+        <div class="buttons-extremes" *ngIf="!usernameAvailable">
+          <button class="signupbtn" mat-raised-button color="accent" routerLink="/home/signup">Sign up</button>
+          <button id="nextbtn" mat-raised-button color="primary" (click)="usernameEntered(progress)">Next</button>
+        </div>
+        <!-- -->
+
+        <div *ngIf="usernameAvailable">
+          <mat-form-field>
+            <input matInput placeholder="Password" name="password" type="password" [(ngModel)]="password" (click)="inputClicked()">
+          </mat-form-field>
+          <button mat-raised-button color="primary" (click)="login(progress)">Log In</button>
+        </div>
+      </form>
+
+      <div class="error">
+        <p *ngIf="errorFound">{{error}}</p>
+      </div>
+
+      <div id="flex3">
+
+
+      </div>
+    </div><br>
+
+  </div>
+</div>

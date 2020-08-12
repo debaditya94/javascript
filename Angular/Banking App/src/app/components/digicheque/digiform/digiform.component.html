@@ -1,0 +1,150 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-9">
+            <h3>
+                <b>Select the account you want to send the cheque from</b>
+            </h3>
+        </div>
+        <div class="col-md-2 col-offset-1">
+            <mat-form-field>
+                <mat-select color="primary" placeholder="Select Account No." (change)="fillSenderAccount($event)">
+                    <mat-option *ngFor="let accountProfile of accountsProfiles" [value]="accountProfile.$value">
+                        {{ accountProfile.$value }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+
+
+    <div class="row ">
+        <form class="col-md-10 kuch" [formGroup]="heroForm">
+
+            <div class="col-md-9 container1">
+                <br>
+                <div class="row">
+                    <div class="col-md-4" id="bank">
+                        <label>JUST BANK!</label>
+                    </div>
+
+                    <div class="form-group" class="col-md-4" styles="center;">
+                        <p for="mobileno">Beneficiary Mobile*</p>
+                        <input class="form-control" formControlName="mobileno" type="number" name="mobileno" id="mobileno" placeholder="10 digit mobile number">
+                        <p *ngIf="heroForm.get('mobileno')?.errors?.required && heroForm.get('mobileno')?.touched" class="help-block">Mobile Number is required!</p>
+                    </div>
+
+                    <div class="form-group" class="col-md-4">
+                        <div class='input-group date' id='datetimepicker1'>
+                            <label>Date*</label>
+                            <br>
+                            <!-- <input type='date' class="form-control" formControlName="date" placeholder="Pick a Date"> -->
+
+                            <mat-form-field>
+                                <input (blur)="fnc(inp)" #inp matInput [min]="minDate" formControlName="dateTime" [matDatepicker]="picker" placeholder="Choose a date"
+                                    (dateInput)="addEvent($event)" (dateChange)="addEvent($event)">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker touchUi="true" #picker></mat-datepicker>
+                            </mat-form-field>
+
+                            <p *ngIf="heroForm.get('dateTime')?.errors?.required && heroForm.get('dateTime')?.touched" class="help-block">Date is required!</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            &nbsp;&nbsp;&nbsp;
+                            <label for="name">Name*</label>
+                            <!-- &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; -->
+                            <input class="form-control" formControlName="name" type="text" name="name" id="name" placeholder="XYZ">
+                            <p *ngIf="heroForm.get('name')?.errors?.required && heroForm.get('name')?.touched" class="help-block">Name has to be specified!</p>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            &nbsp;&nbsp;&nbsp;
+                            <label for="amountInWords">Amount in words*</label>
+                            <input class="form-control" formControlName="amountInWords" type="text" name="amountInWords" id="amountInWords" placeholder="Zero"
+                                formControlName="amountInWords">
+                            <p *ngIf="heroForm.get('amountInWords')?.errors?.required && heroForm.get('amountInWords')?.touched" class="help-block">Amount in words has to be specified!</p>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label for="amount">Amount*</label>
+                            <div class="rupee">
+                                <i class="fa fa-rupee"></i>
+                                <input class="form-control" formControlName="amount" type="number" name="amount" id="amount" placeholder="0">
+                            </div>
+                            <p *ngIf="heroForm.get('amount')?.errors?.required && heroForm.get('amount')?.touched" class="help-block">Amount has to be specified!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            &nbsp;&nbsp;&nbsp;
+                            <label for="senderAccountNumber">Your A/C Number*</label>
+                            <input class="form-control" formControlName="senderAccountNumber" type="number" name="senderAccountNumber" id="senderAccountNumber"
+                                placeholder="XXXXX">
+                            <p *ngIf="heroForm.get('senderAccountNumber')?.errors?.required && heroForm.get('senderAccountNumber')?.touched" class="help-block">Your account Number has to be specified!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            &nbsp;&nbsp;&nbsp;
+                            <label for="accountNumber">A/C Number*</label>
+                            <input class="form-control" formControlName="accountNumber" type="number" name="accountNumber" id="accountNumber" placeholder="XXXXX">
+                            <p *ngIf="heroForm.get('accountNumber')?.errors?.required && heroForm.get('accountNumber')?.touched" class="help-block">Account Number has to be specified!</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+        </form>
+        <div class="col-md-2" id="">
+            <!-- <div class="dropdown" dropdown>
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" dropdown-open>
+                    Select Beneficiary
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li role="menuitem" *ngFor="let beneficiary of beneficiaries"> <a class="dropdown-item" (click)=" displayDetails(beneficiary)">{{beneficiary.name}}</a></li>
+                    </div>
+                </div> -->
+            <mat-form-field>
+                <mat-select color="primary" class="benSelect" placeholder="Select Beneficiary" (change)="displayDetails($event)">
+                    <mat-option *ngFor="let beneficiary of beneficiaries" [value]="beneficiary">
+                        {{ beneficiary.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div *ngIf="this.profileSelected==1">
+                <mat-form-field>
+                    <mat-select color="primary" placeholder="Select Account No." (change)="fillRecipientAccount($event)">
+                        <mat-option *ngFor="let accountProfile of accountsProfiles" [value]="accountProfile.$value">
+                            {{ accountProfile.$value }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <button type="button" class="btn btn-primary bton" style="margin: 10px;" routerLink="./beneficiary-form">Add Beneficiary</button>
+            <button type="button" class="btn btn-success bton" style="margin: 10px;" (click)="onSubmit(heroForm)" [disabled]="heroForm.invalid">Proceed</button>
+
+        </div>
+    </div>
+</div>

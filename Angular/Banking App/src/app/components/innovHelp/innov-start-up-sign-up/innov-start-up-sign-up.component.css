@@ -1,0 +1,74 @@
+.center{
+    padding:50px;
+    background:linear-gradient(45deg,#db456b, #e2544d,#e24dd6,#934de2,#574de2);
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top:0;
+    bottom:0;
+    width:100%;
+    
+}
+
+.inner{
+    margin-top:50px;
+    margin-bottom:50px;
+}
+
+
+
+
+.help-block{
+    color : red;
+    margin-top: -15px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-container > * {
+    width: 100%;
+  }
+
+  .example-card {
+    width: 250px;
+    margin: 10px 20px 10px 10px ;
+  }
+
+  .flex{
+      display: flex;
+      flex-direction: row;
+      width:auto;
+      height: auto;
+      flex-wrap: wrap;
+  }
+.teamMemberHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+.fa-trash-o{
+    font-size:20px;
+}
+
+.backtohome{
+    line-height: 24px;
+    width: 18px;
+    font-size: 14pt;
+    font-family: tahoma;
+    margin-top: 1px;
+    margin-right: 2px;
+    position:absolute;
+    top:15px;
+    left:15px;
+    color: rgba(255,255,255,0.5);
+    display: block;
+    cursor: pointer;
+  }
+  .backtohome:hover{
+    color: rgba(255,255,255,1);
+  }

@@ -1,0 +1,35 @@
+.outer{
+    padding:20px;
+    background-color: white;
+    color:#07041e;
+    display:flex;   
+    position: relative;
+    z-index: 2;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow:3px 3px 5px #c1cddb;
+}
+
+.inner{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+button{
+    margin-left:20px;
+    border:0;
+    border-radius:30px;
+    border-width:2px;
+    border-style:solid;
+    border-color:#e54265;
+    background-color:white;
+    padding:10px;
+    color:#e54265;
+}
+button:hover{
+    background-color:#e54265;
+    color:white;
+}
+span{
+    color:#07041e;
+}

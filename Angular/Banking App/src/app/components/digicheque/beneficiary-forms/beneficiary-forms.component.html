@@ -1,0 +1,119 @@
+<!-- Name *
+Account Number*
+Confirm Account Number*
+Transfer Limit (INR)* -->
+
+
+<div class="container">
+  <mat-card>
+  <form action="" #myForm="ngForm" >
+    <div class="form-group">
+      <label for="name">Name* : </label>
+      <input type="text"
+            class="form-control text1" 
+            id="name"
+            name="name" 
+            placeholder="XYZ" 
+            pattern="[a-zA-Z ]*"
+            ngModel required
+            #name="ngModel">
+            <div *ngIf="name.errors && name.touched" >
+              <p class="help-block" *ngIf="name.errors.required" >
+                  name is required
+              </p>
+              <p class="help-block" *ngIf="name.errors.pattern" >
+                enter only a-z, A-Z or space
+              </p>
+            </div>
+      
+    </div>
+    <div class="form-group">
+      <label for="account">Account No.* : </label>
+      <input type="number"
+               class="form-control text1" 
+               id="account"
+                name="account"
+                 placeholder="0XXXXXXXX9" 
+                 
+                 ngModel 
+                 required 
+                 #account="ngModel">
+      <div *ngIf="account.errors && account.touched">
+        <p class="help-block" *ngIf="account.errors.required">
+          account is required
+        </p>
+        <p class="help-block" *ngIf="account.errors.account">
+          account is invalid
+        </p>
+      </div>
+
+     
+    </div>
+    <div class="form-group">
+      <label for="confirmAccount">Confirm Account No. * : </label>
+      <input type="number"
+            class="form-control text1"
+            id="confirmAccount"
+            name="confirmAccount"
+            placeholder="0XXXXXXXX9" 
+            
+            ngModel 
+            required
+            >
+      <p *ngIf="myForm.controls.confirmAccount?.touched && myForm.controls.confirmAccount?.invalid" class="help-block">
+        Enter Correct Account No. please
+      </p>
+      <p *ngIf="myForm.controls.confirmAccount?.touched && myForm.controls.confirmAccount.value!=myForm.controls.account.value" class="help-block">
+        The account numbers should match
+      </p>
+    </div>
+    <div class="form-group">
+        
+         <label for="mobileNumber">Mobile No. *</label>
+         <input type="number" 
+               class="form-control text1"
+                id="mobileNumber"
+                name="mobileNumber"
+                placeholder="XXXXXXXXXX" 
+                ngModel
+                required
+                #mobileNumber="ngModel">
+         <p *ngIf="mobileNumber?.touched 
+                 && mobileNumber?.invalid" class="help-block">
+           Mobile Number has to be specified
+         </p>
+       </div>
+
+    <!-- <div class="form-group">
+       
+        <label for="transferAmount">Transfer Amount</label>
+        <input type="number" 
+              class="form-control text1"
+               id="transferAmount"
+               name="transferAmount"
+               placeholder="transferAmount" 
+               
+               ngModel
+               required
+               #transferAmount="ngModel">
+        <p *ngIf="transferAmount?.touched 
+                && transferAmount?.invalid" class="help-block">
+          Amount has to be specified
+        </p>
+      </div> -->
+
+      
+
+
+    <button class="btn button1" type="button"(click)="onSubmit(myForm)" 
+             [disabled]="myForm.invalid" > 
+            Submit
+    </button>
+    <button class="btn button2" type="button" routerLink="/landingPage/digicheque">
+        <!-- [disabled]="myForm.invalid" > -->
+        Cancel
+</button>
+    <!-- <p *ngIf="myForm?.touched && myForm?.invalid && myForm.submitted " >please fill all the mandaotry details</p> -->
+  </form>
+</mat-card>
+</div>

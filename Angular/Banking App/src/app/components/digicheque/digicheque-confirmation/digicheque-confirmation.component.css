@@ -1,0 +1,120 @@
+.container{
+    width : 80%;
+    height : 80%;
+    /* margin : 40px; */
+    margin-top : 40px;
+    
+    box-shadow: 0px 0px 20px -5px #666;
+    background:white;
+    border-radius: 5px;
+}
+.spin{
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+
+.container1{
+    width:400px;
+    font-size : 30px;
+    position: relative;
+    /* margin: 15%;  */
+    margin-top : -25px;
+    border : 1px solid #8C55AD;
+    box-shadow : 0px 0px 5px #59655E;
+    background : linear-gradient(#062669,#1A5D98,#0B669D);
+    text-align: center;
+    color : #FFFFFF;
+    padding-top : 10px;
+    border-radius: 15px;
+}
+
+
+
+#card {
+    font-style: italic;
+    text-align: center;
+}
+img{
+    width  : 20%;
+    height : auto;
+    margin : 30px;
+}
+
+.col-md-4{
+    padding : 10px;
+}
+.col-md-8{
+  font-style : oblique;
+}
+
+#flex1,#flex3{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width:100%;
+ 
+}
+
+
+
+#cheque{
+    
+    border:2px solid #7D847E;
+    padding:20px;
+    /* box-shadow : 0px 0px 20px #000000; */
+    margin-top: -15px;
+    border-radius: 2px;
+    border-bottom-color:#19273d;
+    border-bottom-width:30px;
+    border-bottom-style:solid;
+    box-shadow: 3px 3px 20px -5px #888;
+}
+
+#flex2{
+    padding: 40px;
+}
+
+mat-card{
+    /* width:40vw; */
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items: center;
+    border-block-start: 0px 0px 15px #211F1F;
+
+}
+img{
+
+    
+}
+
+/* #flex3{
+
+    /* padding:-20px; 
+    background-color: inherit;
+}  */
+
+#flex4{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width:100%;
+    margin-top : -20px;
+  
+}
+
+
+.btn:hover {
+    color:white;
+    background-image: linear-gradient(to bottom, #4524EA, #533EE7);
+    text-decoration: none;
+    transform: scale(1.2);
+  }

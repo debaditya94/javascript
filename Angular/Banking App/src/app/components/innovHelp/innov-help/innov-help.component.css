@@ -1,0 +1,37 @@
+.main{
+    width:100%;
+    margin-top:-50px;
+}
+.outer{
+    padding:20px;
+    background-color: #07041e;
+    color:white;
+    display:flex;
+    position: relative;
+    z-index: 2;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inner{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+button{
+    margin-left:20px;
+    border:0;
+    border-radius:30px;
+    border-width:4px;
+    border-style:solid;
+    border-color:white;
+    background-color:#07041e;
+    padding:10px;
+}
+button:hover{
+    background-color:white;
+    color:#07041e;
+}
+span{
+    color:white;
+}

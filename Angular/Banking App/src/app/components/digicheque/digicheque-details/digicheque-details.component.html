@@ -1,0 +1,55 @@
+<mat-card class="center"> 
+<div>
+    <h4>You shall be sent an otp to confirm cheque transction on your phone. Kindly enter the otp you recieved after 
+        you clicked on <b>Proceed to OTP</b></h4>
+</div>
+<button type="button" class=" button1"  data-toggle="modal" data-target="#myModal">Proceed To OTP</button> 
+</mat-card>
+
+<!-- <div *ngFor="let account of accounts">
+
+ <a (click)=" displayDetails(account)">{{account.balance}}</a>
+
+</div> -->
+
+
+
+
+  <!--Modal-->
+  <div class="modal" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+       <div class="modal-content">
+        <div class="modal-header modalHeader">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"> Do you want to proceed further? </h4>
+        </div>
+        <div class="modal-body text1">
+          <p>Click ok to do so </p>
+          <p>Click cancel to go back and edit.</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="button4" data-dismiss="modal" routerLink="./../digicheque-otp" (click)="sendOTP()">Ok</button>
+          <button type="button" class="button5" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+      
+    </div>
+  </div> 
+
+
+  <!-- <ol>
+      <li>
+        <mat-form-field>
+          <input matInput [(ngModel)]="name" placeholder="What's your name?">
+        </mat-form-field>
+      </li>
+      <li>
+        <button mat-raised-button (click)="openDialog()">Pick one</button>
+      </li>
+      <li *ngIf="animal">
+        You chose: <i>{{animal}}</i>
+      </li>
+    </ol>
+     -->

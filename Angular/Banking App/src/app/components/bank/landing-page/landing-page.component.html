@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <div class="row">
+      <app-user-header></app-user-header>
+  </div>
+  <div class="row">
+    <div class="col-md-1">
+        <div class="leftSideBar">
+            <div class="sidebar-btn" id="dashboard" >
+              <div class="circle-image" (mouseover)="btnHover(dashimg)" (mouseout)="btnOut(dashimg)" (click)="btnClick(dashimg)" routerLinkActive="activebtn" routerLink="dashboard" >
+                <img src="./../../../../assets/icons/dashboard-white.png" #dashimg id="dashimg">
+              </div>
+              <p>Dashboard</p>
+            </div>
+            <div class="sidebar-btn" id="account" >
+              <div class="circle-image" (mouseover)="btnHover(accountsimg)" (mouseout)="btnOut(accountsimg)" (click)="btnClick(accountsimg)" routerLinkActive="activebtn" routerLink="accounts">
+                <img src="./../../../../assets/icons/account-white.png" #accountsimg>
+              </div>
+              <p>Accounts</p>
+            </div>
+            <div class="sidebar-btn" id="digiCheque" >
+              <div class="circle-image" (mouseover)="btnHover(chequeimg)" (mouseout)="btnOut(chequeimg)" (click)="btnClick(chequeimg)" routerLinkActive="activebtn" routerLink="digicheque">
+                <img src="./../../../../assets/icons/cheque-white.png" #chequeimg>
+              </div>
+              <p>digiCheque</p>
+            </div>
+            <div class="sidebar-btn" id="pms" >
+              <div class="circle-image" (mouseover)="btnHover(pmsimg)" (mouseout)="btnOut(pmsimg)" (click)="btnClick(pmsimg)" routerLinkActive="activebtn" routerLink="portfolio">
+                <img src="./../../../../assets/icons/pms-white.png" #pmsimg >
+              </div>
+              <p>Goals</p>
+            </div>
+            <div class="sidebar-btn" id="innovHelp" >
+              <div class="circle-image" (mouseover)="btnHover(innovimg)" (mouseout)="btnOut(innovimg)" (click)="btnClick(innovimg)" routerLinkActive="activebtn" routerLink="/innovHelp">
+                <img src="./../../../../assets/icons/innovelp-white.png" #innovimg>
+              </div>
+              <p>innov - Help</p>
+            </div>
+          </div>
+    </div>
+    <div class="col-md-11">
+      <div class="back">
+          <router-outlet></router-outlet>
+      </div> 
+    </div>
+  </div>
+</div>

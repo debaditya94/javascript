@@ -1,0 +1,40 @@
+#footer{
+    width:100%;
+    min-height:190px;
+    background-color: #1e1e1e; 
+    position:relative;
+    bottom:0;
+    padding-top:10px;
+    padding-bottom:20px;
+    z-index:-1;
+}
+
+.footer-stuff{
+    max-width:90%;
+    margin:0 auto;
+    color:#aaa;
+    line-height: 30px
+}
+.img-style{
+    width:35px;
+    height:35px;
+}
+ul.a     	     {
+    list-style: none;
+     }
+
+ul.a li >p:before {
+    content: "\00BB \0020";
+     }
+ul li >p{
+    margin-bottom:0;
+    padding:0px;
+}
+
+.images > img{
+    height: 26px;
+}
+
+h4{
+    margin-bottom:2px;
+}

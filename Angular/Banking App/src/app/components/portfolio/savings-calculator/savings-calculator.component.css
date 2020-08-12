@@ -1,0 +1,97 @@
+input.ng-touched.ng-invalid{
+  border:1px solid red;
+}
+
+input.ng-touched.ng-valid{
+  border:1px solid green;
+}
+
+span{
+  color:red;
+  font-size: 12px;
+}
+
+.demo-chart {
+  height: 400px;
+}
+
+.alert{
+  font-size: 17px;
+}
+
+strong{
+  font-size: 18px;
+}
+
+.container-fluid{
+  padding:20px 10px 20px 20px;
+}
+
+.btn{
+  width:100px;
+}
+
+.breadcrumb{
+  background: white;
+  margin: -20px 0 10px -13px;
+}
+
+a,a:hover{
+  color:#337ab7;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+input,select,.alert{
+  -webkit-box-shadow: 0 8px 6px -6px rgb(146, 135, 135);
+  -moz-box-shadow: 0 8px 6px -6px rgb(146, 135, 135);
+       box-shadow: 0 8px 6px -6px rgb(146, 135, 135);
+}
+
+.option{
+  padding:5px 10px 5px 10px;
+  background: lightgray;
+  color:grey;
+  font-size: 14px;
+  border-radius: 10px;
+  margin-top:12px;
+  margin-right:8px;
+}
+
+.flex{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap
+}
+
+#button{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin:-20px 0px 10px 0;
+}
+
+.btn-success{
+  width:120px;
+}
+
+.card{
+  background-color:white;
+  margin-top:10px;
+  margin-left:5px;
+  border-radius:4px;
+  box-shadow: 3px 3px 20px -10px #444;
+  padding:10px;
+}
+
+mat-card{
+  -webkit-box-shadow: 0px 4px 20px -3px rgba(0,0,0,0.75) !important;
+  -moz-box-shadow: 0px 4px 20px -3px rgba(0,0,0,0.75) !important;
+  box-shadow: 0px 4px 20px -3px rgba(0,0,0,0.75) !important;
+}
+
+@media only screen and (max-width: 500px) {
+  .demo-chart{
+    height:200px;
+  }
+}

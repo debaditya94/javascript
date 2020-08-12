@@ -1,0 +1,209 @@
+<div class="fund" data-toggle="modal" data-target="#myModal">
+  <h2>Funds Transfer</h2>
+  <h3>+</h3>
+
+</div>
+ 
+
+<div>
+  <h2 id="chequeHeader">Cheques</h2>
+</div>
+<div class="main-flex">
+    <div class="card acc" *ngFor="let chequ of cheques;let i = index" >
+        <div>
+            <h5><strong>Sent By : </strong>{{chequ?.senderID}}</h5>
+            <h5><strong>Sender Account Number : </strong>{{chequ?.senderAccount}}</h5>
+            <h5><strong>Amount : </strong>{{chequ?.amount}}</h5>
+            <h5><strong>Date : </strong>{{chequ?.dateTime}}</h5>
+           
+            <!-- <h4><strong>Transaction Pwd : </strong>{{cheque?.transactionPassword}}</h4> -->
+           
+            <!-- <div class="btn btn-danger" href="#">
+                <i class="icon-trash trash-o" (click)="onDelete(i)">Delete</i>
+           </div> -->
+         
+              <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#EncashModal" (click)="setCheque(chequ)" [disabled]="chequ.dateTime!=currDate">Encash</button>
+        
+          </div>
+        </div>  
+ </div>
+  
+  
+  
+  
+   <!-- Encash Modal -->
+<div id="EncashModal" class="modal fade" role="dialog">
+  
+      <div class="modal-dialog">
+      
+          <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 style="text-align:center"class="modal-title">Encash Page</h3>
+              </div>  
+              
+              <div class="modal-body">
+                  <div class="container formStyle">
+                     <form [formGroup]="encashForm" >
+                          <div class="form-group">
+                              <label for="transact_pwd">Sender Passcode*</label>
+                              <input type="text" 
+                                    class="form-control" 
+                                    id="transact_pwd" 
+                                    formControlName="transact_pwd">
+                              <p *ngIf="encashForm.get('transact_pwd').touched && encashForm.get('transact_pwd').invalid"
+                                  class="help-block">Transaction Password is required!</p>
+                                  <p *ngIf="encashForm.get('transact_pwd').touched && encashForm.controls.transact_pwd.value!=cheque.transactionPassword"
+                                  class="help-block">Transaction Password incorrect!</p>
+                                                           
+  
+                          
+                                <label for="otp">Enter received OTP*</label>
+                                 <input type="password" 
+                                        class="form-control" 
+                                        name="otp" 
+                                        id="otp" 
+                                        formControlName="otp">
+                                 <p *ngIf="encashForm.get('otp').touched && encashForm.get('otp').invalid"
+                                     class="help-block">otp number is required!</p>
+                               </div>
+                               <button type="submit" class="btn btn-success"  (click)="encash(cheque?.senderAccount,cheque?.recieverAccount,cheque?.amount,cheque?.transactionPassword,encashForm)" data-dismiss="modal">Encash Amount</button>
+  
+                      </form>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+       </div>
+     </div>
+</div>
+<!-- Modal -->
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h2 style="text-align:center;font-weight:strong" class="modal-title">Enter Details</h2>
+      </div>
+      <div class="modal-body">
+        <div class="bs-example">
+          <div *ngIf="flag==false" class="alert alert-warning">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Sorry!</strong> An error occurred during your transaction. Make sure you have entered valid details and
+            try again.
+          </div>
+        </div>
+        <div class="bs-example">
+          <div *ngIf="flag==true" class="alert alert-success">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Success!</strong> Your transaction is processed succesfully. Thankyou for banking with us.
+          </div>
+        </div>
+
+        <div class="container formStyle">
+          <!-- <h3>Enter Details</h3>   -->
+          <form [formGroup]="transferForm" class="form-horizontal">
+            <div class="form-group">
+              <label class="control-label col-sm-4" id="select" for="singleSelect">Select Account*</label><br>
+              <div class="col-sm-8">
+                <select formControlName="account" (change)="getIndex(transferForm)" name="account" id="account" required class="form-control">
+                     <option  *ngFor="let account of accounts" [value]="account.account_id" >{{account.account_name+"-"+account.account_id}}</option>
+                     
+                   </select>
+                <p *ngIf="transferForm.get('account').touched && transferForm.get('account').invalid" class="help-block red">
+                  Please select an account to proceed
+                </p>
+                <p class="help-block green" *ngIf="transferForm.get('account').touched"><strong>Your Account Balance is Rs.{{bal}}/-</strong></p>
+                <p class="help-block red" *ngIf="bal==0">Balance is too low or nill to proceed</p>
+
+                <p>
+                  <!-- Your selected account balance is {{accounts[acc_num_id].balance}} -->
+                </p>
+              </div>
+
+
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-4" for="bName">Beneficiary Name*</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" name="bName" id="bName" required formControlName="bName">
+                <p *ngIf="transferForm.get('bName').touched && transferForm.get('bName').invalid" class="help-block red"> Please enter the beneficiary name</p>
+              </div>
+              
+
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-4" for="bAccount">Beneficiary Account Number*</label>
+              <div class="col-sm-8">
+                <input type="number" class="form-control" [(ngModel)]="bAccount" name="bAccount" id="bAccount" required pattern="[0-9]{10}" required formControlName="bAccount">
+                <p *ngIf="transferForm.get('bAccount').touched && transferForm.get('bAccount').invalid" class="help-block red">Please enter a valid 10 digit Account Number </p>
+                <p class="help-block red" *ngIf="(transferForm.get('account').touched && transferForm.get('bAccount').touched )&&(transferForm.get('bAccount').value==transferForm.get('account').value)"
+                  class="help-block red">Sender and Receiver couldn't be the same</p>
+              </div>
+
+              
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-4" for="bAccount1">Confirm Beneficiary Account Number*</label>
+              <div class="col-sm-8">
+                <input type="number" class="form-control" name="bAccount1" id="bAccount1" pattern="[0-9]{10}" required formControlName="bAccount1">
+                <p *ngIf="transferForm.get('bAccount1').touched && transferForm.get('bAccount1').invalid" class="help-block red">Please enter a valid 10 digit Account Number</p>
+                <p *ngIf="(transferForm.get('bAccount1').touched && transferForm.get('bAccount').touched )&&(transferForm.get('bAccount').value!=transferForm.get('bAccount1').value)"
+                  class="help-block red">Sorry, Account numbers didn't match. Please enter again</p>
+                <p class="green" *ngIf="(transferForm.get('bAccount1').touched && transferForm.get('bAccount').touched )&&(transferForm.get('bAccount').value==transferForm.get('bAccount1').value)"
+                  class="help-block green">Account numbers match!!!</p>
+              </div>
+              
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-4" for="amount">Amount in Rupees*</label>
+              <div class="col-sm-8">
+                <input type="number" class="form-control" name="amount" id="amount" required formControlName="amount">
+                <p *ngIf="transferForm.get('amount').touched && transferForm.get('amount').invalid" class="help-block red">
+                  Please enter the amount
+                </p>
+                <p *ngIf="transferForm.get('amount').value>bal" class="help-block red">
+                  Sorry. The requested amount is higher than your available balance.Kindly select another account
+                </p>
+              </div>
+             
+
+
+            </div>
+            <div *ngIf="(transferForm.get('amount').value)<bal">
+              <button type="submit" id="gen" (click)="sendOtp()" class="btn btn-primary blueButton" [disabled]="bool">Generate OTP</button>
+
+              <div class="form-group">
+                <a (click)=resendOtp()>
+                  <p>Didn't receive OTP?Receive via voice call!</p>
+                </a>
+                <label class="control-label col-sm-4" for="otp">Please enter the 4-digit OTP received on your mobile*</label>
+                <div class="col-sm-8">
+                  <input type="password" class="form-control" name="otp" id="otp" formControlName="otp" required>
+                  <p *ngIf="transferForm.get('otp').touched && transferForm.get('otp').invalid" class="help-block red">
+                    Please enter a valid OTP
+                  </p>
+                </div>
+                
+              </div>
+
+
+              <button type="submit" class="btn btn-primary blueButton" (click)="verifyOtp(transferForm)">Verfiy OTP</button> &nbsp;
+
+              <button type="submit" id="transfer" class="btn btn-success greenButton2" [disabled]="(status!='OK')" (click)="nextAction(transferForm)"> <span matTooltip="Tooltip!">Transfer Fund</span></button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success btn-md greenButton1" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

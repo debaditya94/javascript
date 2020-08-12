@@ -1,0 +1,71 @@
+.card{
+    background-color:white;
+    margin-top:6px;
+    margin-left:5px;
+    border-radius:4px;
+    box-shadow: 3px 3px 20px -10px #444;
+    padding:10px;
+  }
+
+  .flex{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap
+  }
+
+  .option{
+    padding:5px 10px 5px 10px;
+    background: lightgray;
+    color:grey;
+    font-size: 14px;
+    border-radius: 10px;
+    margin-top:12px;
+    margin-right:8px;
+  }
+
+  .demo-chart {
+    height: 400px;
+  }
+
+  #button{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin:-20px 0px 10px 0;
+  }
+  
+  .btn-success{
+    width:120px;
+  }
+
+  .alert{
+    font-size: 17px;
+  }
+  
+  strong{
+    font-size: 18px;
+  }
+
+  input,select,.alert{
+    -webkit-box-shadow: 0 8px 6px -6px rgb(146, 135, 135);
+    -moz-box-shadow: 0 8px 6px -6px rgb(146, 135, 135);
+     box-shadow: 0 8px 6px -6px rgb(146, 135, 135);
+  }
+
+  input.ng-touched.ng-invalid{
+    border:1px solid red;
+  }
+  
+  input.ng-touched.ng-valid{
+    border:1px solid green;
+  }
+  
+  span{
+    color:red;
+    font-size: 12px;
+  }
+
+  .row{
+      height:100vh;
+      margin-top:25px;
+  }

@@ -1,0 +1,57 @@
+<div class="container">
+  <div *ngIf="progress==1 && otp_status!=1" class="spin">
+
+    <mat-spinner></mat-spinner>
+    Kindly wait while we process your transaction......
+
+
+
+  </div>
+</div>
+
+<mat-card class="center">
+  <div *ngIf="progress==0">
+    <form action="" #myForm="ngForm">
+      <div class="form-group">
+        <label for="transactionPassword">Transaction Password* : </label>
+        <input type="text" class="form-control text1" id="transactionPassword" name="transactionPassword" transactionPassword="transactionPassword"
+          placeholder={{passcode}} ngModel required #transactionPassword="ngModel" readonly>
+        <div *ngIf="transactionPassword.errors && transactionPassword.touched">
+          <p class="help-block" *ngIf="transactionPassword.errors.required">
+            Transaction Password is required
+          </p>
+        </div>
+
+      </div>
+      <div class="form-group">
+        <label for="otp">OTP* : </label>
+        <input type="password" class="form-control text1" id="otp" name="otp" placeholder="1234567890" ngModel required #otp="ngModel">
+        <div *ngIf="otp.errors && otp.touched">
+          <p class="help-block" *ngIf="otp.errors.required">
+            OTP is required
+          </p>
+          <p class="help-block" *ngIf="otp.errors.otp">
+            OTP is invalid
+          </p>
+        </div>
+        <div *ngIf="otp_status==1">
+          Incorrect otp entered
+        </div>
+        <div class="row">
+          <!-- <button class="btn btn-success" (click)="displayDetails(myForm)">
+            Check details of form 
+          </button> -->
+          <button class="btn button1" type="submit" (click)="verifyOTP(myForm)">
+            <!-- [disabled]="myForm.invalid" > -->
+            Submit
+          </button>
+          <button class="btn button2" type="submit" (click)="myForm.reset()" routerLink="/landingPage/digicheque">
+            <!-- [disabled]="myForm.invalid" > -->
+            Cancel
+          </button>
+        </div>
+
+      </div>
+    </form>
+    </div>  
+</mat-card>

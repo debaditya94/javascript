@@ -1,0 +1,24 @@
+<div class="entirePage">
+    <div class="leftSideBar">
+      <img class="profileImage" src={{startup.logoUrl}}>
+      <h4 id="startupname">{{startup.name}}</h4>
+  
+      <div class="breakLine"></div>
+      <div class="flex-column">
+        <ul class="sidebaroptions">
+          <li routerLinkActive="activeLink" routerLink="investors">Investors</li>
+          <li>Ideas Pitched <br> (Coming Soon)</li>
+          <li>Following <br> (Coming Soon)</li>
+          <li routerLinkActive="activeLink" routerLink="/landingPage">Banking Services</li>
+        </ul>
+      </div>
+    </div>
+    <div class="mainContent">
+      <app-innov-help-header></app-innov-help-header>
+      <router-outlet></router-outlet>
+      
+    </div>
+  </div>
+
+
+  

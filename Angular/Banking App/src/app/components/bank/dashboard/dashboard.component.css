@@ -1,0 +1,149 @@
+.fund{
+    height:100%;
+    width:22%;
+   background-color:white;
+   text-align:center;
+    margin-top:auto;
+   padding:5px;
+    position: relative;
+    font-weight: strong;
+    cursor: pointer;
+}
+.fund h3{
+    font-size:55px;
+}
+.fund h2{
+    font-weight: strong;
+    font-size: 40px;
+}
+
+.btn{
+    width:initial;
+}
+
+.formStyle{
+    width:70%;
+    margin-top:1%;
+    text-align: center;
+}
+.formStyle h3{
+    font-size:32px;
+    font-weight: strong;
+}
+.formStyle p{
+    font-weight:strong;
+    color:red;
+
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    max-height: 500px;
+    min-width: 300px;
+  }
+  
+  .mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }
+
+  .card{
+    min-height:200px;
+    width: 280px;
+    background-color:#EDD3D3;
+    padding:8px;
+    border-radius:4px;
+    box-shadow: 3px 3px 20px -10px #444;
+    text-align: center;
+    margin-bottom:20px;
+    margin-right:20px;
+    overflow: hidden;
+    transition: transform 1s ease-in; 
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+}
+.acc{
+    background: linear-gradient(90deg, #E54D65,#E8786E);
+    color:#000000;
+    min-height:160px;
+    text-align: left;
+}
+
+.main-flex{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.modal1{
+    height:100%;
+    width:22%;
+   background-color:white;
+   text-align:center;
+    margin-top:auto;
+   padding:5px;
+    position: relative;
+    font-weight: strong;
+    cursor: pointer;
+}
+.blueButton{
+    background: transparent;
+    border:2px solid white;
+    color:white;
+    font-weight: bold;
+}
+.blueButton:hover{
+    background-color: white;
+    color:#F070A2
+}
+.greenButton1{
+    border:2px solid #451965;
+    background-color: white;
+    color:#451965;
+    font-weight: bold;
+}
+.greenButton1:hover{
+    background-color: #451965;
+    color:white;
+    
+}
+.greenButton2{
+    border:2px solid #451965;
+    background-color: white;
+    color:#451965;
+    font-weight: bold;
+}
+.greenButton2:active{
+    background-color: #451965;
+    color:white;
+    
+}
+.greenButton2:hover{
+    background-color: #451965;
+    color:white;
+    border:2px solid #451965
+}
+a{
+    color:white;
+    text-decoration: none;
+    cursor: pointer;
+}
+a:hover{
+    color:#451965;
+    font-size:16px;
+    font-weight: bold;
+}
+
+.acc h5{
+    color:white;
+}
+
+#chequeHeader{
+    padding-left:10px;
+    color:#E54D65;
+    margin:30px;
+}

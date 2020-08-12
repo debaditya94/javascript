@@ -1,0 +1,71 @@
+<div class="entire">
+  
+      <div *ngIf="!isSuccess && isAccounts===2">
+          <mat-card class="example-card" *ngIf="startup && investor && investor_acc">
+              <mat-card-header>
+                <div class="flex">
+                  <div>
+                      <img mat-card-md-image class="logo" src="{{startup.logoUrl}}" >
+                      <div><h2>{{startup.name}}</h2></div>
+                      <div style="margin:5% 0% 5% 0%;">
+                          <h3>Investment Agreement</h3>
+                        </div>  
+                  </div>   
+                  
+                </div>
+                  
+                  
+              </mat-card-header>
+              <mat-card-content>
+                <form action="" [formGroup]="investmentForm">
+                  <div class="example-container">
+            
+                    <p>This agreement is between </p> <strong> {{investor.name}} </strong> and <strong> {{startup.name}} </strong>  
+                    <br><p style="text-align:left;"><strong>Investment Amount</strong></p><br>
+                    <mat-form-field>
+                        <span matPrefix>&#x20B9;</span> <input matInput type="number" placeholder="How much do you want to invest?" formControlName="amount" id="amount" name="amount" [(ngModel)]="amt">                 
+                        <mat-error *ngIf="investmentForm?.get('amount')?.errors?.validAmount">*Low Funds, Add funds or change your primary account in Edit Profile</mat-error>
+                        <mat-error *ngIf="investmentForm?.get('amount')?.errors?.validZero">*Please invest some amount</mat-error>
+                    </mat-form-field>              
+                    <br><p style="text-align:left;"><strong>and Equity</strong></p><br>
+                    <mat-form-field>
+                        <input matInput type="number" placeholder="Ownership Interest" formControlName="equity" id="equity" name="equity">
+                        <span matSuffix>%</span>
+                        <mat-error *ngIf="investmentForm?.get('equity')?.errors?.validEquity">*Please enter Valid equity</mat-error>
+                    </mat-form-field>
+                      <mat-checkbox formControlName="agreementRead" id="agreementRead" name="agreementRead">I have read <a>Terms and Conditions</a></mat-checkbox>
+                  </div>
+                </form>
+            
+            
+              </mat-card-content>
+              <mat-card-actions>
+                <button *ngIf="isAccounts == 2" mat-raised-button color="primary" (click)="processForm()" [disabled]="investmentForm?.invalid">INVEST with Account <strong>Balance : {{investor_acc.balance}}</strong></button>
+                <button mat-raised-button (click)="cancelInvestment()">CANCEL</button>
+              </mat-card-actions>
+            </mat-card>
+            
+      </div>
+      <div *ngIf="isSuccess">
+          <!-- <div class="trigger">
+              <div class="col-md-2 col-sm-2 col-xs-6 col-md-offset-5 col-sm-offset-5 col-xs-offset-3">
+                <div class="trigger"></div>
+                <svg version="1.1" id="tick" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                  viewBox="0 0 37 37" style="enable-background:new 0 0 37 37;" xml:space="preserve">
+                  <path class="circ path" style="fill:none;stroke:#000;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:10;" d="
+                  M30.5,6.5L30.5,6.5c6.6,6.6,6.6,17.4,0,24l0,0c-6.6,6.6-17.4,6.6-24,0l0,0c-6.6-6.6-6.6-17.4,0-24l0,0C13.1-0.2,23.9-0.2,30.5,6.5z"
+                  />
+                  <polyline class="tick path" style="fill:none;stroke:#000;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:10;" points="
+                  11.6,20 15.9,24.2 26.4,13.8 " />
+                </svg>
+              </div>
+            </div> -->
+      
+            
+            
+      </div>
+  
+      
+  </div>
+  
+  

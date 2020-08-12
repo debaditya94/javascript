@@ -1,0 +1,85 @@
+.stuff{
+    margin-top:110px;
+    margin-bottom: 1%;
+    background-color:#F1F7ED;
+}
+
+.imgStyle{
+    height:25%;
+
+}
+.styleCarousel{
+    margin-right:0px;
+    border-radius: 40px 40px 40px 40px;
+    overflow: hidden;
+    margin: 3px black;
+    margin-right: inherit;
+    margin-left: inherit;
+    
+    
+  
+    
+}
+.styleButton{
+    text-align:center;
+    position: center;
+}
+.card1{
+    display:block;
+    box-shadow:5px 5px 12px -4px #444 ;
+    padding:5px;
+    background-color:#C6CBC2;
+    width:75%;
+    height:100%;
+    margin-left: auto;
+    margin-right:auto;
+    margin-top:45px;
+    text-align:center;
+    line-height:30px;
+}
+.card1 p{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 20px;
+}
+.card1 h3{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+}
+.btnStyle{
+
+ width:120px;
+ font-size: 20px;
+ padding:10px 12px 10px 12px;
+ background-color:#E36414;
+ color:white;
+
+}
+.pqr{
+    margin-left: auto;
+    margin-right:auto;
+    text-align: center;
+
+}
+
+.imgStyle p{
+    font-size:24px;
+    font-family: 'Bitter', serif;
+    position: center;
+    text-align:center;
+}
+.imgStyle h2{
+    font-family: 'Bitter', serif;
+    font-size:36px;
+    position: center;
+    text-align:center;
+    margin-top: auto;
+}
+.btnStyle1{
+    width:120px;
+    box-shadow:5px 5px 12px -4px  #99ffff;
+    margin-top:auto;
+    font-size:15px;
+    background-color:#E36414;
+    color:white;
+}

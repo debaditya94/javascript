@@ -1,0 +1,545 @@
+
+<div class="card padding0">
+        <div *ngIf="!finish">
+                <mat-progress-bar [color]="color" [mode]="mode"></mat-progress-bar>
+                
+        </div>
+    <div class="row">
+        <div class="col-md-3">
+            <h4>Tools &amp; Calculators</h4>
+            <mat-card id="card1">
+                <div id="flex1">
+                    <div [routerLink]="['./','savingsGoal']" class="tool">
+                        Savings Goal
+                    </div>
+                    <div [routerLink]="['./','savingsEstimator']" class="tool">
+                        Savings Estimator
+                    </div>
+                    <div [routerLink]="['./','time']" class="tool">
+                        Time To Achieve Goal
+                    </div>
+                    <div class="tool" data-toggle="modal" data-target="#myModal" (click)="reset()">
+                        Currency Converter
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+        <div class="col-md-7">
+            <div id="chart">
+                <div class="spinner" *ngIf="!finish">
+                    <h2>Loading...</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <h4 id="market">Market Actions</h4>
+            <mat-card id="card2">
+                <div class="market_flex">
+                    <div>
+                        <strong>Stock</strong>
+                    </div>
+                    <div>
+                        <strong>Price</strong>
+                    </div>
+                </div>
+                <div class="market_flex" *ngFor="let response of data ; let i = index" (click)="plotChart(response['Meta Data']['2. Symbol'])">
+                    <div>
+                        <a>{{response['Meta Data']['2. Symbol']}}</a>
+                    </div>
+                    <div>{{response['Time Series (1min)'][time[i]]['4. close'] }}</div>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Recent Calculations</h4>
+            <div class="example-header">
+                <mat-form-field>
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+                </mat-form-field>
+            </div>
+            <div class="table-responsive">
+                <div class="example-container mat-elevation-z8">
+                    <mat-table [dataSource]="dataSource" matSort *ngIf="goals.length>0">
+
+                        <ng-container matColumnDef="financialGoal">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Financial Goal </mat-header-cell>
+                            <mat-cell *matCellDef="let row"> {{row.financialGoal}} </mat-cell>
+                        </ng-container>
+
+
+                        <ng-container matColumnDef="savingsGoal">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Savings Goal</mat-header-cell>
+                            <mat-cell *matCellDef="let row"> {{row.savingsGoal}} </mat-cell>
+                        </ng-container>
+
+
+                        <ng-container matColumnDef="currentSavings">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Current Savings</mat-header-cell>
+                            <mat-cell *matCellDef="let row"> {{row.currentSavings}} </mat-cell>
+                        </ng-container>
+
+
+                        <ng-container matColumnDef="annualInterest">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Annual Interest</mat-header-cell>
+                            <mat-cell *matCellDef="let row"> {{row.annualInterest}} </mat-cell>
+                        </ng-container>
+
+
+                        <ng-container matColumnDef="numberOfYears">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Number Of Years</mat-header-cell>
+                            <mat-cell *matCellDef="let row"> {{row.numberOfYears}} </mat-cell>
+                        </ng-container>
+
+
+                        <ng-container matColumnDef="monthlyInvestment">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Monthly Investment</mat-header-cell>
+                            <mat-cell *matCellDef="let row"> {{row.monthlyInvestment}} </mat-cell>
+                        </ng-container>
+
+
+                        <ng-container matColumnDef="compounding">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Compounding</mat-header-cell>
+                            <mat-cell *matCellDef="let row"> {{row.compounding}} </mat-cell>
+                        </ng-container>
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;">
+                        </mat-row>
+                    </mat-table>
+
+                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Suggestions</h4>
+            <div class="col-md-6">
+                <div class="marquee" *ngIf="max=='Travel'">
+                    <div class="img1">
+                        <a href="http://www.coxandkings.com/" target="_blank">
+                            <img src="assets/img/coxandkings.jpg" />
+                        </a>
+                    </div>
+                    <div class="img1">
+                        <a href="https://www.sotc.in/" target="_blank">
+                            <img src="http://www.travelnewsdigest.in/wp-content/uploads/2016/04/sotc-1.jpg" />
+                        </a>
+                    </div>
+                    <div class="img1">
+                        <a href="https://www.yatra.com/" target="_blank">
+                            <img src="assets/img/yatra.jpg" />
+                        </a>
+                    </div>
+                    <div class="img1">
+                        <a href="https://www.yatra.com/" target="_blank">
+                            <img src="assets/img/yatra2.jpg" />
+                        </a>
+                    </div>
+
+                </div>
+                <div class="marquee" *ngIf="max=='Education'">
+                    <div class="img1">
+                        <a href="http://www.medill.northwestern.edu/" target="_blank">
+                            <img src="http://www.medill.northwestern.edu/_images/imc/640x320-related/IMC-online-graduation-640x320.jpg" class="thumbnail"
+                            />
+                        </a>
+                    </div>
+                    <div class="img1">
+                        <a href="https://www.harvard.edu/" target="_blank">
+                            <img src="assets/img/university.jpg" class="thumbnail" />
+                        </a>
+                    </div>
+                    <div class="img1">
+                        <a href="https://www.topuniversities.com/university-rankings" target="_blank">
+                            <img src="assets/img/rankings.jpg" class="thumbnail" />
+                        </a>
+                    </div>
+                    <div class="img1">
+                        <a href="https://travel.state.gov/content/visas/en/study-exchange/student.html" target="_blank">
+                            <img src="assets/img/visa.jpg" class="thumbnail" />
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="marquee" *ngIf="max=='Marriage'">
+                    <div class="img1">
+                        <a href="http://www.joyalukkas.com/" target="_blank">
+                            <img src="https://i2.wp.com/keralaweddingtrends.com/wp-content/uploads/2015/11/Vaani-Kapoor-TBZ-Jewellery-Photo-Shoot.jpg?fit=660%2C330&w=640"
+                            />
+                        </a>
+                    </div>
+                    <div class="img1">
+                        <a href="http://www.nalli.com/" target="_blank">
+                            <img src="https://3.bp.blogspot.com/-RNUaI_I-lEM/WY6h-9sdmnI/AAAAAAAAJZk/Quf7L7WHGK4QScDv4_NJ95_OfH5uQ2YVwCLcBGAs/s640/specials_kachi749.jpg"
+                            />
+                        </a>
+                    </div>
+                    <div class="img1">
+                        <a href="https://harvestcaterers.in/best-catering-services-kerala.php" target="_blank">
+                            <img src="https://2.bp.blogspot.com/-i4a6pUE2PnY/VuFKl2Xo1tI/AAAAAAAAAF0/wJjGDkJ8__w/s640/menu1.jpg" />
+                        </a>
+                    </div>
+                    <div class="img1">
+                        <a href="https://kochi.wedding.net/venues/" target="_blank">
+                            <img src="https://ui.cltpstatic.com/places/hotels/9879/987966/images/CELEBRATIONS_w.jpg" />
+                        </a>
+                    </div>
+                    <div class="img1">
+                        <a href="https://kochi.wedding.net/planners/" target="_blank">
+                            <img src="assets/img/weddingplanner.jpg" />
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="marquee" *ngIf="max=='Buy an asset'">
+                    <div class="img1">
+                        <a href="https://jainhousing.com/" target="_blank">
+                            <img src="assets/img/jainc.jpg" />
+                        </a>
+                    </div>
+                    <div class="img1">
+                        <a href="https://royalenfield.com/" target="_blank">
+                            <img src="assets/img/royalenfield.jpg" />
+                        </a>
+                    </div>
+                    <div class="img1">
+                        <a href="https://www.bmw.in/en/index.html" target="_blank">
+                            <img src="assets/img/bmw.jpg" />
+                        </a>
+                    </div>
+                    <div class="img1">
+                        <a href="https://www.princess.co.uk/" target="_blank">
+                            <img src="assets/img/yacht.jpg" />
+                        </a>
+                    </div>
+                    <div class="img1">
+                        <a href="https://trump.com/" target="_blank">
+                            <img src="assets/img/trump.jpg" />
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="marquee" *ngIf="max=='null'">
+                    <div class="img1">
+                        <a href="https://www.yatra.com/" target="_blank">
+                            <img src="assets/img/yatra.jpg" />
+                        </a>
+                    </div>
+                    <div class="img1">
+                        <a href="https://www.topuniversities.com/university-rankings" target="_blank">
+                            <img src="assets/img/rankings.jpg" class="thumbnail" />
+                        </a>
+                    </div>
+                    <div class="img1">
+                        <a href="https://harvestcaterers.in/best-catering-services-kerala.php" target="_blank">
+                            <img src="https://2.bp.blogspot.com/-i4a6pUE2PnY/VuFKl2Xo1tI/AAAAAAAAAF0/wJjGDkJ8__w/s640/menu1.jpg" />
+                        </a>
+                    </div>
+                    <div class="img1">
+                        <a href="https://royalenfield.com/" target="_blank">
+                            <img src="assets/img/royalenfield.jpg" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="flex2">
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form class="form" [formGroup]="curr">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-5 col-xs-4">
+                                <input type="number" placeholder="From" class="form-control" formControlName="from" />
+                            </div>
+                            <div class="col-md-1 col-xs-1"></div>
+                            <div class="col-md-5 col-xs-5">
+                                <select class="form-control" formControlName="fromCurr">
+                                    <option value="USD">USD</option>
+                                    <option value="AFN">Afghanistan Afghanis – AFN</option>
+                                    <option value="ALL">Albania Leke – ALL</option>
+                                    <option value="DZD">Algeria Dinars – DZD</option>
+                                    <option value="ARS">Argentina Pesos – ARS</option>
+                                    <option value="AUD">Australia Dollars – AUD</option>
+                                    <option value="ATS">Austria Schillings – ATS</option>
+
+                                    <option value="BSD">Bahamas Dollars – BSD</option>
+                                    <option value="BHD">Bahrain Dinars – BHD</option>
+                                    <option value="BDT">Bangladesh Taka – BDT</option>
+                                    <option value="BBD">Barbados Dollars – BBD</option>
+                                    <option value="BEF">Belgium Francs – BEF</option>
+                                    <option value="BMD">Bermuda Dollars – BMD</option>
+
+                                    <option value="BRL">Brazil Reais – BRL</option>
+                                    <option value="BGN">Bulgaria Leva – BGN</option>
+                                    <option value="CAD">Canada Dollars – CAD</option>
+                                    <option value="XOF">CFA BCEAO Francs – XOF</option>
+                                    <option value="XAF">CFA BEAC Francs – XAF</option>
+                                    <option value="CLP">Chile Pesos – CLP</option>
+
+                                    <option value="CNY">China Yuan Renminbi – CNY</option>
+                                    <option value="CNY">RMB (China Yuan Renminbi) – CNY</option>
+                                    <option value="COP">Colombia Pesos – COP</option>
+                                    <option value="XPF">CFP Francs – XPF</option>
+                                    <option value="CRC">Costa Rica Colones – CRC</option>
+                                    <option value="HRK">Croatia Kuna – HRK</option>
+
+                                    <option value="CYP">Cyprus Pounds – CYP</option>
+                                    <option value="CZK">Czech Republic Koruny – CZK</option>
+                                    <option value="DKK">Denmark Kroner – DKK</option>
+                                    <option value="DEM">Deutsche (Germany) Marks – DEM</option>
+                                    <option value="DOP">Dominican Republic Pesos – DOP</option>
+                                    <option value="NLG">Dutch (Netherlands) Guilders – NLG</option>
+
+                                    <option value="XCD">Eastern Caribbean Dollars – XCD</option>
+                                    <option value="EGP">Egypt Pounds – EGP</option>
+                                    <option value="EEK">Estonia Krooni – EEK</option>
+                                    <option value="EUR">Euro – EUR</option>
+                                    <option value="FJD">Fiji Dollars – FJD</option>
+                                    <option value="FIM">Finland Markkaa – FIM</option>
+
+                                    <option value="FRF*">France Francs – FRF*</option>
+                                    <option value="DEM">Germany Deutsche Marks – DEM</option>
+                                    <option value="XAU">Gold Ounces – XAU</option>
+                                    <option value="GRD">Greece Drachmae – GRD</option>
+                                    <option value="GTQ">Guatemalan Quetzal – GTQ</option>
+                                    <option value="NLG">Holland (Netherlands) Guilders – NLG</option>
+                                    <option value="HKD">Hong Kong Dollars – HKD</option>
+
+                                    <option value="HUF">Hungary Forint – HUF</option>
+                                    <option value="ISK">Iceland Kronur – ISK</option>
+                                    <option value="XDR">IMF Special Drawing Right – XDR</option>
+                                    <option value="INR">INR</option>
+                                    <option value="IDR">Indonesia Rupiahs – IDR</option>
+                                    <option value="IRR">Iran Rials – IRR</option>
+
+                                    <option value="IQD">Iraq Dinars – IQD</option>
+                                    <option value="IEP*">Ireland Pounds – IEP</option>
+                                    <option value="ILS">Israel New Shekels – ILS</option>
+                                    <option value="ITL*">Italy Lire – ITL*</option>
+                                    <option value="JMD">Jamaica Dollars – JMD</option>
+                                    <option value="JPY">Japan Yen – JPY</option>
+
+                                    <option value="JOD">Jordan Dinars – JOD</option>
+                                    <option value="KES">Kenya Shillings – KES</option>
+                                    <option value="KRW">Korea (South) Won – KRW</option>
+                                    <option value="KWD">Kuwait Dinars – KWD</option>
+                                    <option value="LBP">Lebanon Pounds – LBP</option>
+                                    <option value="LUF">Luxembourg Francs – LUF</option>
+
+                                    <option value="MYR">Malaysia Ringgits – MYR</option>
+                                    <option value="MTL">Malta Liri – MTL</option>
+                                    <option value="MUR">Mauritius Rupees – MUR</option>
+                                    <option value="MXN">Mexico Pesos – MXN</option>
+                                    <option value="MAD">Morocco Dirhams – MAD</option>
+                                    <option value="NLG">Netherlands Guilders – NLG</option>
+
+                                    <option value="NZD">New Zealand Dollars – NZD</option>
+                                    <option value="NOK">Norway Kroner – NOK</option>
+                                    <option value="OMR">Oman Rials – OMR</option>
+                                    <option value="PKR">Pakistan Rupees – PKR</option>
+                                    <option value="XPD">Palladium Ounces – XPD</option>
+                                    <option value="PEN">Peru Nuevos Soles – PEN</option>
+
+                                    <option value="PHP">Philippines Pesos – PHP</option>
+                                    <option value="XPT">Platinum Ounces – XPT</option>
+                                    <option value="PLN">Poland Zlotych – PLN</option>
+                                    <option value="PTE">Portugal Escudos – PTE</option>
+                                    <option value="QAR">Qatar Riyals – QAR</option>
+                                    <option value="RON">Romania New Lei – RON</option>
+
+                                    <option value="ROL">Romania Lei – ROL</option>
+                                    <option value="RUB">Russia Rubles – RUB</option>
+                                    <option value="SAR">Saudi Arabia Riyals – SAR</option>
+                                    <option value="XAG">Silver Ounces – XAG</option>
+                                    <option value="SGD">Singapore Dollars – SGD</option>
+                                    <option value="SKK">Slovakia Koruny – SKK</option>
+
+                                    <option value="SIT">Slovenia Tolars – SIT</option>
+                                    <option value="ZAR">South Africa Rand – ZAR</option>
+                                    <option value="KRW">South Korea Won – KRW</option>
+                                    <option value="ESP">Spain Pesetas – ESP</option>
+                                    <option value="XDR">Special Drawing Rights (IMF) – XDR</option>
+                                    <option value="LKR">Sri Lanka Rupees – LKR</option>
+
+                                    <option value="SDD">Sudan Dinars – SDD</option>
+                                    <option value="SEK">Sweden Kronor – SEK</option>
+                                    <option value="CHF">Switzerland Francs – CHF</option>
+                                    <option value="TWD">Taiwan New Dollars – TWD</option>
+                                    <option value="THB">Thailand Baht – THB</option>
+                                    <option value="TTD">Trinidad and Tobago Dollars – TTD</option>
+
+                                    <option value="TND">Tunisia Dinars – TND</option>
+                                    <option value="TRY">Turkey New Lira – TRY</option>
+                                    <option value="AED">United Arab Emirates Dirhams – AED</option>
+                                    <option value="GBP">United Kingdom Pounds – GBP</option>
+                                    <option value="USD">United States Dollars – USD</option>
+                                    <option value="VEB">Venezuela Bolivares – VEB</option>
+
+                                    <option value="VND">Vietnam Dong – VND</option>
+                                    <option value="ZMK">Zambia Kwacha – ZMK</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-md-5 col-xs-4">
+                                <input type="number" placeholder="To" readonly class="form-control" formControlName="to" />
+                            </div>
+                            <div class="col-md-1 col-xs-1"></div>
+                            <div class="col-md-5 col-xs-5">
+                                <select class="form-control" formControlName="toCurr">
+                                    <option value="USD">USD</option>
+                                    <option value="AFN">Afghanistan Afghanis – AFN</option>
+                                    <option value="ALL">Albania Leke – ALL</option>
+                                    <option value="DZD">Algeria Dinars – DZD</option>
+                                    <option value="ARS">Argentina Pesos – ARS</option>
+                                    <option value="AUD">Australia Dollars – AUD</option>
+                                    <option value="ATS">Austria Schillings – ATS</option>
+
+                                    <option value="BSD">Bahamas Dollars – BSD</option>
+                                    <option value="BHD">Bahrain Dinars – BHD</option>
+                                    <option value="BDT">Bangladesh Taka – BDT</option>
+                                    <option value="BBD">Barbados Dollars – BBD</option>
+                                    <option value="BEF">Belgium Francs – BEF</option>
+                                    <option value="BMD">Bermuda Dollars – BMD</option>
+
+                                    <option value="BRL">Brazil Reais – BRL</option>
+                                    <option value="BGN">Bulgaria Leva – BGN</option>
+                                    <option value="CAD">Canada Dollars – CAD</option>
+                                    <option value="XOF">CFA BCEAO Francs – XOF</option>
+                                    <option value="XAF">CFA BEAC Francs – XAF</option>
+                                    <option value="CLP">Chile Pesos – CLP</option>
+
+                                    <option value="CNY">China Yuan Renminbi – CNY</option>
+                                    <option value="CNY">RMB (China Yuan Renminbi) – CNY</option>
+                                    <option value="COP">Colombia Pesos – COP</option>
+                                    <option value="XPF">CFP Francs – XPF</option>
+                                    <option value="CRC">Costa Rica Colones – CRC</option>
+                                    <option value="HRK">Croatia Kuna – HRK</option>
+
+                                    <option value="CYP">Cyprus Pounds – CYP</option>
+                                    <option value="CZK">Czech Republic Koruny – CZK</option>
+                                    <option value="DKK">Denmark Kroner – DKK</option>
+                                    <option value="DEM">Deutsche (Germany) Marks – DEM</option>
+                                    <option value="DOP">Dominican Republic Pesos – DOP</option>
+                                    <option value="NLG">Dutch (Netherlands) Guilders – NLG</option>
+
+                                    <option value="XCD">Eastern Caribbean Dollars – XCD</option>
+                                    <option value="EGP">Egypt Pounds – EGP</option>
+                                    <option value="EEK">Estonia Krooni – EEK</option>
+                                    <option value="EUR">Euro – EUR</option>
+                                    <option value="FJD">Fiji Dollars – FJD</option>
+                                    <option value="FIM">Finland Markkaa – FIM</option>
+
+                                    <option value="FRF*">France Francs – FRF*</option>
+                                    <option value="DEM">Germany Deutsche Marks – DEM</option>
+                                    <option value="XAU">Gold Ounces – XAU</option>
+                                    <option value="GRD">Greece Drachmae – GRD</option>
+                                    <option value="GTQ">Guatemalan Quetzal – GTQ</option>
+                                    <option value="NLG">Holland (Netherlands) Guilders – NLG</option>
+                                    <option value="HKD">Hong Kong Dollars – HKD</option>
+
+                                    <option value="HUF">Hungary Forint – HUF</option>
+                                    <option value="ISK">Iceland Kronur – ISK</option>
+                                    <option value="XDR">IMF Special Drawing Right – XDR</option>
+                                    <option value="INR">INR</option>
+                                    <option value="IDR">Indonesia Rupiahs – IDR</option>
+                                    <option value="IRR">Iran Rials – IRR</option>
+
+                                    <option value="IQD">Iraq Dinars – IQD</option>
+                                    <option value="IEP*">Ireland Pounds – IEP</option>
+                                    <option value="ILS">Israel New Shekels – ILS</option>
+                                    <option value="ITL*">Italy Lire – ITL*</option>
+                                    <option value="JMD">Jamaica Dollars – JMD</option>
+                                    <option value="JPY">Japan Yen – JPY</option>
+
+                                    <option value="JOD">Jordan Dinars – JOD</option>
+                                    <option value="KES">Kenya Shillings – KES</option>
+                                    <option value="KRW">Korea (South) Won – KRW</option>
+                                    <option value="KWD">Kuwait Dinars – KWD</option>
+                                    <option value="LBP">Lebanon Pounds – LBP</option>
+                                    <option value="LUF">Luxembourg Francs – LUF</option>
+
+                                    <option value="MYR">Malaysia Ringgits – MYR</option>
+                                    <option value="MTL">Malta Liri – MTL</option>
+                                    <option value="MUR">Mauritius Rupees – MUR</option>
+                                    <option value="MXN">Mexico Pesos – MXN</option>
+                                    <option value="MAD">Morocco Dirhams – MAD</option>
+                                    <option value="NLG">Netherlands Guilders – NLG</option>
+
+                                    <option value="NZD">New Zealand Dollars – NZD</option>
+                                    <option value="NOK">Norway Kroner – NOK</option>
+                                    <option value="OMR">Oman Rials – OMR</option>
+                                    <option value="PKR">Pakistan Rupees – PKR</option>
+                                    <option value="XPD">Palladium Ounces – XPD</option>
+                                    <option value="PEN">Peru Nuevos Soles – PEN</option>
+
+                                    <option value="PHP">Philippines Pesos – PHP</option>
+                                    <option value="XPT">Platinum Ounces – XPT</option>
+                                    <option value="PLN">Poland Zlotych – PLN</option>
+                                    <option value="PTE">Portugal Escudos – PTE</option>
+                                    <option value="QAR">Qatar Riyals – QAR</option>
+                                    <option value="RON">Romania New Lei – RON</option>
+
+                                    <option value="ROL">Romania Lei – ROL</option>
+                                    <option value="RUB">Russia Rubles – RUB</option>
+                                    <option value="SAR">Saudi Arabia Riyals – SAR</option>
+                                    <option value="XAG">Silver Ounces – XAG</option>
+                                    <option value="SGD">Singapore Dollars – SGD</option>
+                                    <option value="SKK">Slovakia Koruny – SKK</option>
+
+                                    <option value="SIT">Slovenia Tolars – SIT</option>
+                                    <option value="ZAR">South Africa Rand – ZAR</option>
+                                    <option value="KRW">South Korea Won – KRW</option>
+                                    <option value="ESP">Spain Pesetas – ESP</option>
+                                    <option value="XDR">Special Drawing Rights (IMF) – XDR</option>
+                                    <option value="LKR">Sri Lanka Rupees – LKR</option>
+
+                                    <option value="SDD">Sudan Dinars – SDD</option>
+                                    <option value="SEK">Sweden Kronor – SEK</option>
+                                    <option value="CHF">Switzerland Francs – CHF</option>
+                                    <option value="TWD">Taiwan New Dollars – TWD</option>
+                                    <option value="THB">Thailand Baht – THB</option>
+                                    <option value="TTD">Trinidad and Tobago Dollars – TTD</option>
+
+                                    <option value="TND">Tunisia Dinars – TND</option>
+                                    <option value="TRY">Turkey New Lira – TRY</option>
+                                    <option value="AED">United Arab Emirates Dirhams – AED</option>
+                                    <option value="GBP">United Kingdom Pounds – GBP</option>
+                                    <option value="USD">United States Dollars – USD</option>
+                                    <option value="VEB">Venezuela Bolivares – VEB</option>
+
+                                    <option value="VND">Vietnam Dong – VND</option>
+                                    <option value="ZMK">Zambia Kwacha – ZMK</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button class="btn btn-success" (click)="exchange(curr)">Calculate</button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>

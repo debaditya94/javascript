@@ -1,0 +1,64 @@
+<ul class="mainul">
+    <li class="mainli" *ngFor="let investor of investors; let idx=index">
+  
+  
+  
+      <div class="flexa">
+        <img [src]="investor.profilePic">
+        <div class="flex">
+          <span class="name">{{investor.name}}</span>
+          <ul class="gray" *ngFor="let experience of investor.experience">
+            <li>{{experience.designation}} at {{experience.companyName}}</li>
+          </ul>
+        </div>
+      </div>
+      <p class="about">{{investor.about}}</p>
+  
+      <div>
+  
+      </div>
+  
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+  
+            <button class="know" type="button" >Know More</button>
+  
+          </mat-expansion-panel-header>
+          <div>
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Startup</th>
+                  <th>Money Invested</th>
+                  <th>Equity Accepted</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let investment of investments[idx]?.id; let i = index">
+                  <td>{{i+1}}</td>
+                  <td>
+                    <div class="startupcard" *ngIf="startups">
+                      <img class="startupLogo" [src]="startups[investment.startup_id]?.logoUrl">
+                      <span>{{startups[investment.startup_id]?.name}}</span>
+                    </div>
+  
+                  </td>
+                  <td>&#8377; {{investment.amount}}</td>
+                  <td>{{investment.equity}} &#37;</td>
+                </tr> 
+              </tbody>
+            </table>
+            <div class="flex-spacearound">
+                <textarea class="form-control" #message rows="5" id="comment" placeholder="Please help our company by investing in us."></textarea>
+                <button (click)="pitchIdea(idx,message)">Send Request for Funds</button>
+            </div>
+            
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+  
+  
+    </li>
+  </ul>

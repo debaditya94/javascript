@@ -1,0 +1,20 @@
+<div *ngIf="pitchedStartups.length>0 && startups.length>0">
+  <div *ngFor="let pitchedStartup of pitchedStartups;index as i">
+    <div class="col-md-4 col-sm-4 col-xs-12" >
+        
+        <mat-card *ngIf="startups[i]" class="pitch-card">
+            <p>{{pitchedStartup.date | date : 'dd-mm-yy'}}</p>
+            <h3>{{startups[i].name}}</h3>
+            <h5>{{pitchedStartup.msg}}</h5>
+            <br>
+            <button color="primary" mat-raised-button [routerLink]="['/investorLanding/startupDetails',startups[i]['$key']]">More Details</button>
+            <button color="accent" mat-raised-button (click)="ignoreStartup(pitchedStartup,i)">Ignore</button>
+        </mat-card>
+    </div>
+    
+
+  </div>
+</div>
+<div *ngIf="pitchedStartups.length==0">
+  <h3>Oops! No Startups have pitched you yet.</h3>
+</div>

@@ -1,0 +1,161 @@
+html, body {
+	height: 100%;
+	padding: 0;
+	margin: 0;
+}
+body {
+    min-height: 600px;
+
+}
+p{
+    font-size: 40px;
+    text-align:center;
+    margin-top:4%;
+    
+    position: relative;
+    margin-right:auto;
+    margin-left: auto;
+    padding:2px;
+    width:auto;
+
+}
+/* body * {
+	font-family: Arial, Geneva, SunSans-Regular, sans-serif;
+	font-size: 14px;
+	color: #333;
+	line-height: 22px;
+} */
+
+.caroufredsel_wrapper{
+	
+}
+#border, #wrapper {
+	border-radius: 200px;
+	overflow: hidden;
+	width: 275px;
+	height: 275px;
+	position: absolute;
+    left: 51%;
+  
+}
+#border {
+	box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+	border: 25px solid #eee;
+	margin: 6% 15px 0 -150px;
+	z-index: 0;
+}
+#wrapper {
+	border: 10px solid #eee;
+	margin: 6% 0 0 -148px;
+	z-index: 2;
+}
+#carousel img {
+	display: block;
+	float: left;
+	object-fit: cover;
+}
+ 
+#pager {
+	width: 300px;
+	margin: 52% 0 0 -150px;
+	position: absolute;
+	
+	left: 54%;
+	z-index: 1;
+}
+#pager a {
+	border: 5px solid #eee;
+	border-radius: 30px;
+	overflow: hidden;
+	display: block;
+	width: 50px;
+	height: 50px;
+	margin: 0 0 0 -30px;
+	position: absolute;
+	left: 48%;
+	
+	-webkit-transition: margin 0.5s ease;
+	-moz-transition: margin 0.5s ease;
+	transition: margin 0.5s ease;
+}
+#pager a.thumb1 {
+	top: 45px;
+	margin-left: -150px;
+}
+#pager a.thumb1.selected {
+	margin-top: -20px;
+	margin-left: -115px;
+}
+#pager a.thumb2 {
+	top: 90px;
+	margin-left: -98px;
+}
+#pager a.thumb2.selected {
+	margin-top: -35px;
+	margin-left: -85px;
+}
+#pager a.thumb3 {
+	top: 110px;
+}
+#pager a.thumb3.selected {
+	margin-top: -40px;
+}
+#pager a.thumb4 {
+	top: 90px;
+	margin-left: 38px;
+}
+#pager a.thumb4.selected {
+	margin-top: -35px;
+	margin-left: 25px;
+}
+#pager a.thumb5 {
+	top: 45px;
+	margin-left: 90px;
+}
+#pager a.thumb5.selected {
+	margin-top: -20px;
+	margin-left: 55px;
+}
+	
+
+
+blockquote {
+    font-family: Georgia, serif;
+    font-size: 25px;
+    font-style: italic;
+    width: 500px;
+   
+    padding: 0.35em 40px;
+    line-height: 1.45;
+    position: relative;
+    color: #383838;
+    margin-top: 15%;
+   margin-left: 20%;
+    margin-right:auto;
+   
+}
+
+blockquote:before {
+    display: block;
+    padding-left: 10px;
+    content: "\201C";
+    font-size: 80px;
+    position: absolute;
+    left: -20px;
+    top: -20px;
+    color: #7a7a7a;
+}
+
+blockquote cite {
+    color: #999999;
+    font-size: 14px;
+    display: block;
+    margin-top: 5px;
+}
+
+blockquote cite:before {
+    content: "\2014 \2009";
+}
+div.col-md-7{
+    min-height:100%;
+}

@@ -1,0 +1,85 @@
+<div *ngIf="this.loadedData!=3" class="spin">
+  
+    <mat-spinner style="margin:0 auto;"></mat-spinner>
+    Kindly wait while we process your transaction......
+</div>
+
+<div *ngIf="this.loadedData==3">
+    <div class="container">
+        <form [formGroup]="heroForm"> 
+         <div id="flex1">
+          <div class="container1">
+            Cheque Status!
+          </div>
+        </div>
+      
+      
+        <div class="row1" id="flex3">
+          <mat-card><p>Your Cheque sent successfully</p><img class="img-responsive" src="assets/icons[/tick.png">
+          </mat-card>
+        </div>
+      
+      
+        <div class="row" id="flex2">
+          <div id="cheque">
+            <div class="container2">
+              <div class="row">
+                <div class="col-md-4" id="bank"><label>JUST BANK!</label></div>
+      
+                <div class="col-md-4" styles="center;">
+                  <label for="mobile_number">Beneficiary Mobile</label>
+                  <input class="form-control" formControlName="mobileno" type="number" name="mobileno" id="mobileno" placeholder="10 digit mobile number">
+                </div>
+      
+      
+                <div class="col-md-4">
+                  <label>Date</label>
+                  <input type='text' class="form-control" formControlName="date" name="date" id="date" placeholder="Date of transaction">
+                </div>
+              </div>
+      
+      
+              <div class="row">
+                <div class="col-md-4">
+                  <label>Beneficiary-Name</label>
+                  <input class="form-control" formControlName="name" type="text" name="name" id="name" placeholder="XYZ">
+                </div>
+      
+                <div class="col-md-4">
+                  </div>
+      
+                <div class="col-md-4">
+                  <label>Amount</label>
+                  <input class="form-control" formControlName="amount" type="text" name="amount" id="amount" placeholder="Zero"
+                  formControlName="amount">
+                </div>
+              </div>
+      
+      
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Status</label>
+                  <input class="form-control" formControlName="status" type="text" name="status" id="status" placeholder="Zero"
+                  formControlName="status">
+                </div>
+            
+      
+                <div class="col-md-6 ">
+                  <label>Refernce ID</label>
+                  <input class="form-control" formControlName="referenceID" type="text" name="referenceID" id="referenceID" placeholder="Zero"
+                  formControlName="referenceID">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+          <div class="col-md-6 col-md-offset-3">
+             <div id="flex4">
+             <button type="button" class="btn btn-primary" (click)="onClick()" routerLink="/landingPage/dashboard">Ok</button>
+          </div>
+          <br>
+          </div>
+        </form> 
+      </div>
+</div>

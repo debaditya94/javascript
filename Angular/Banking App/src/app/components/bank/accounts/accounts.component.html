@@ -1,0 +1,42 @@
+<div class="card nacc" (click)="addAccountCardClicked(addAccountCard, newAccountscard)">
+    <div class="progressbar displayNone" #progress>
+      <mat-progress-bar [color]="color" [mode]="mode" [value]="value" [bufferValue]="bufferValue">
+      </mat-progress-bar>
+    </div>
+    <div #addAccountCard>
+      <h3>Create a new Bank Account</h3>
+      <h1 router>+</h1>
+    </div>
+
+
+    <div class="newAccount" #newAccountscard>
+      <h3>Bank Account</h3>
+      <div class="dropDownDiv" (mouseover)="droppingDown(drop)" (mouseout)="uppingDown(drop)" (click)="clickedDown(drop)">
+        <p>{{accountType}}</p>
+        <ul class="drop-down" #drop>
+          <li (click)="liClicked(dd1)" #dd1 id="dd1">Savings Account</li>
+          <li (click)="liClicked(dd2)" #dd2 id="dd2">Salary Account</li>
+          <li (click)="liClicked(dd3)" #dd3 id="dd3">Current Account</li>
+          <li (click)="liClicked(dd4)" #dd4 id="dd4">Recurring Deposit Account</li>
+        </ul>
+      </div>
+      <div *ngIf="showCreateAccountBtn" class="accInfo">
+        <p>{{aboutAccount}}</p>
+        <button class="forgotbtn" mat-raised-button (click)="createAccBtnClicked(progress)">Create</button>
+      </div>
+    </div>
+  </div>
+  <div class="main-flex">
+    
+      <div class="card acc" *ngFor="let account of accounts">
+        <h3>{{account.account_no}}</h3>
+        <h4>{{account.balance}}</h4>
+        <h4>{{account.account_type}}</h4>
+        
+      </div>
+    
+    
+      
+      <!-- <button>Create</button> -->
+    
+    </div>

@@ -1,0 +1,102 @@
+<div class="center">
+  <div class="inner">
+      <div class="backtohome">
+          <i class="fa fa-arrow-left fa-2x" aria-hidden="true" (click)="backtohome()"></i>
+      </div>
+    <mat-horizontal-stepper [linear]="isLinear">
+      
+      <mat-step [stepControl]="basicDetails">
+        <form [formGroup]="basicDetails">
+          <ng-template matStepLabel>Basic Details</ng-template>
+          <div class="flex-column">
+
+            <div class="flex-row">
+              <div class="flex-column flexgrowten">
+                <mat-form-field>
+                  <input matInput placeholder="Full Name" formControlName="name" required>
+                </mat-form-field>
+
+                <mat-form-field>
+                  <mat-select placeholder="Your Account" formControlName="primary_acc" required>
+                    <mat-option *ngFor="let account of accounts" [value]="account">
+                      {{ account }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div>
+                <label for="profile_pic">
+                  <img #profileimg src="./../../assets/icons/profile.jpg" id="profile_img">
+                </label>
+                <input type="file" #filesSelected (change)="imageSelected(filesSelected, profileimg)" accept=".jpg, .jpeg, .png" id="profile_pic">
+                <p *ngIf="!isFile" class="help-block">{{isFileErrorMsg}}</p>
+              </div>
+            </div>
+            <mat-form-field>
+              <input matInput placeholder="Brief Description" formControlName="about" required>
+            </mat-form-field>
+
+
+
+          </div>
+          <div class="flex-row">
+            <button mat-raised-button matStepperNext color="primary" (click)="AddBasicExperienceDetails()" [disabled]="!isFile || basicDetails.invalid">Next</button>           
+          </div>
+        </form>
+      </mat-step>
+
+
+      <mat-step [stepControl]="experienceDetails">
+        <form [formGroup]="experienceDetails">
+          <ng-template matStepLabel>Experience</ng-template>
+          <div formArrayName="experience">
+            <div class="flex_experience">
+              <div *ngFor="let team of experienceDetails?.get('experience').controls; let i=index">
+                <div [formGroupName]="i">
+                  <div class="flex_experience_inner">
+                    <h4 class="one">{{i+1}}</h4>
+                    <mat-form-field class="two">
+                      <input matInput placeholder="Company Name" formControlName="companyName" required>
+                    </mat-form-field>
+                    <mat-form-field class="three">
+                      <input matInput placeholder="Designation" formControlName="designation" required>
+                    </mat-form-field>
+
+                    <div>
+                      <button mat-button class="cross_button" (click)="removeExperienceFrom(i)" *ngIf="i!=0"><i class="fa fa-remove" style="font-size:20px;color:#000;"></i></button>
+                    </div>                    
+                  </div>
+                </div>
+              </div>
+              <div>
+                <button mat-mini-fab color="primary" (click)="AddExperienceFrom()"><i class="fa fa-plus" aria-hidden="true"></i></button>
+              </div>
+            </div>
+          </div>
+          <div class="textarea_container">
+            <mat-form-field>
+              <textarea rows="5" matInput placeholder="Achievements" formControlName="achievements" required></textarea>
+            </mat-form-field>
+          </div>
+          <div>
+            <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+            <button mat-raised-button color="accent" matStepperNext (click)="AddInvestorExperience()">Next</button>
+          </div>
+
+        </form>
+      </mat-step>
+
+
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        You are now done.
+        <div> 
+          <button mat-button matStepperPrevious>Back</button>
+          <button  mat-raised-button color="accent"  (click)="SubmitInvestor()">Submit</button>
+        </div>
+      </mat-step>
+
+
+    </mat-horizontal-stepper>
+  </div>
+</div>
