@@ -1,0 +1,73 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    /* background-color: lightskyblue; */
+    background-image: url('./img/block-breaker.png');
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100vh;
+}
+
+canvas {
+    /* background: #f0f0f0; */
+    /* opacity: 0.5; */
+    display: block;
+    border-radius: 5px;
+    border: 1px solid #fff;
+    /* color: darkslategray */
+}
+
+h1  {
+    /* font-size: 30px; */
+    color: #fff;
+}
+
+.button {
+    cursor: pointer;
+    border: 0;
+    padding: 10px 20px;
+    background: blue;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.button:focus{
+    outline: 0;
+}
+
+.button:hover {
+    background: darkblue;
+}
+
+.button:active {
+    transform: scale(0.98);
+}
+
+.rules-button {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+
+.rules {
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* background: rgb(21, 21, 78); */
+    color: #fff;
+    min-height: 100vh;
+    width: 280px;
+    padding: 20px;
+    line-height: 1.5;
+    transform: translateX(-400px);
+    transition: transform 1s ease-in-out;
+}
+
+.rules.show {
+    transform: translateX(0);
+}
