@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" />
+    <link rel="stylesheet" href="style.css">
+    <title>ToDo List</title>
+</head>
+
+<body>
+    <h1>WORK TO-DOS</h1>
+    <h6 style="color: rgb(253, 208, 6)">Enter text in the input fields to add items to your list</h6>
+    <h6 style="color: rgb(26, 226, 76)">Click the item to mark it as complete</h6>
+    <h6 style="color: rgb(97, 118, 138)">Click the "X" to remove the item from your list</h6>
+    <div class="inputPlaceholder">
+        <input id="taskInput" placeholder="New item..." type="text">
+        <span style="position:relative; right:4%;" class="fas fa-ellipsis-h">
+        </span>
+        <i class="fas fa-pen-square fa-2x" style="cursor: pointer" onClick="addTask()"></i>
+    </div>
+    <div id="taskList">
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

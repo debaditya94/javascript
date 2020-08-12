@@ -1,0 +1,51 @@
+body {
+    text-align: center;
+    background-color: #2497c5;
+}
+
+h1{
+    color: #fefefe;
+    margin-top: 10px;
+    font-weight: 800;
+}
+
+h6{
+    margin: 8px;
+}
+
+::placeholder {
+    font-weight: 500;
+    color: rgb(152, 158, 163);
+}
+
+
+.task {
+    padding: 5px;
+    margin: 5px;
+    border: 2px solid grey;
+    border-radius: 5px;
+    background-color: rgb(29, 180, 185);
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+    color: #fefefe; 
+    text-align: left;
+    padding-left: 2%;
+    font-weight: 500;
+}
+.task button{
+    padding-right: 1%;
+    outline: none;
+}
+
+.inputPlaceholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#taskInput {
+    width: 70%;
+    border-radius: 5px;
+    outline: none;
+}
