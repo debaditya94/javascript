@@ -1,0 +1,13 @@
+.modal-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.modal-title.h4{
+    margin-right: 4%;
+    text-align: center;
+}
+.modal-body{
+    text-align: center;
+}
