@@ -29,9 +29,7 @@ class ActivityDetails extends Component {
     render() {
         let activityDiv;
         if (this.props.details) {
-            console.log(this.props.details);
             const activityList = this.filterTasksByDate(this.props.details.activity_periods, this.state.date);
-            console.log(activityList);
             if (activityList.length > 0) {
                 activityDiv = activityList.map((activity, index) => {
                     return <Activity
@@ -58,7 +56,6 @@ class ActivityDetails extends Component {
                     <div style={{alignSelf: 'center', marginLeft: '1%'}}> Click on the date to change it</div>
                 </Modal.Header>
                 <Modal.Body>
-                    {/* <Activity Activity={this.state.activity}/>  */}
                     {activityDiv}
                 </Modal.Body>
             </Modal>
