@@ -5,16 +5,9 @@ import { ProductCounter } from './productCounter';
 
 class Item extends React.Component {
 
-    buttonComponent = () => {
-        return this.props.product.addedToCart ? (<Text>Added to cart</Text>) : (<Button
-            type="clear"
-            title='Add to cart'
-        onPress={() => this.props.clicked} 
-        />)
-    }
 
     render() {
-        const buttonComponent = this.props.product.addedToCart ? (<ProductCounter style={{flex: 1, alignItems: 'center'}}/>) : (<Button
+        const buttonComponent = this.props.product.addedToCart ? (<ProductCounter quantity ={1} style={{flex: 1, alignItems: 'center'}}/>) : (<Button
             // type="clear"
             title='Add to cart'
             buttonStyle={{width: 120, marginLeft: 30, backgroundColor:'#0B504F'}}

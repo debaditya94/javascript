@@ -8,44 +8,26 @@ import {
 import { connect } from 'react-redux';
 import * as actions from '../redux/actions/item';
 import Item from '../components/item';
-
-const BASE_URL = 'https://raw.githubusercontent.com/sdras/sample-vue-shop/master/dist';
-
-let products = [
-    {
-        name: 'Khaki Suede Polish Work Boots',
-        id: 1,
-        price: 149.99,
-        img: `${BASE_URL}/shoe1.png`
-    },
-    {
-        name: 'Camo Fang Backpack Jungle',
-        id: 2,
-        price: 39.99,
-        img: `${BASE_URL}/jacket1.png`
-    },
-    {
-        name: 'Parka and Quilted Liner Jacket',
-        id: 3,
-        price: 49.99,
-        img: `${BASE_URL}/jacket2.png`
-    },
-    {
-        name: 'Cotton Black Cap',
-        id: 4,
-        price: 12.99,
-        img: `${BASE_URL}/hat1.png`
-    },
-];
+import * as productList from '../assets/productsList.json';
+import { BASE_URL } from '../config/Endpoint';
 
 class Products extends Component {
 
     state = {
         cartItems: [],
-        productList: products
+        productList: []
     };
+    products = [];
     componentDidMount() {
-        products.forEach(product => product['addedToCart'] = false);
+        this.products = productList.default;
+        console.log(this.products);
+        this.products.forEach(product => {
+            product['addedToCart'] = false;
+            product.img = BASE_URL.concat(product.img);
+        });
+
+        console.log(this.products);
+        this.setState({productList: this.products});
     }
     
     addItem(product, index, productList) {
@@ -58,7 +40,8 @@ class Products extends Component {
         };
         cartItems.push(newItem);
         this.setState({
-            cartItems: cartItems
+            cartItems: cartItems,
+            productList: productList
         });
         this.props.onAddItem(newItem);
 
@@ -73,11 +56,11 @@ class Products extends Component {
                     height: "100%",
                 }}>
                 {
-                    products.map((prod, index) => {
+                    this.state.productList.map((prod, index) => {
                         return (
                             <View style={styles.row} key={index}>
                                 <View style={styles.col}>
-                                    <Item product={prod} clicked={() => this.addItem(prod, index, products)}/>
+                                    <Item product={prod} clicked={() => this.addItem(prod, index, this.products)}/>
                                 </View>
                             </View>
                         )
@@ -107,7 +90,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAddItem: (product) => { actions.addItem(product) },
+        onAddItem: (product) => { dispatch(actions.addItem(product)) },
         onRemoveItem: (key) => {
             dispatch(actions.deleteItem(key))
         },

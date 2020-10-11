@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, StyleSheet, View, TouchableNativeFeedback   } from 'react-native';
 
-export const ProductCounter = () => {
+export const ProductCounter = (props) => {
     return (
         <View style={styles.OvalShapeView}>
             <View style={styles.bordersMargin} >
@@ -15,7 +15,7 @@ export const ProductCounter = () => {
                 textAlign: 'center',
                 fontWeight: 'bold',
                 fontSize: 15
-            }}>1</Text></View>
+            }}>{props.quantity}</Text></View>
             <View style={styles.bordersMargin} >
             <TouchableNativeFeedback  ><Text style={{
                 textAlign: 'center',

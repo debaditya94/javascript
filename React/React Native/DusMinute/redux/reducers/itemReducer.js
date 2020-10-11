@@ -1,4 +1,4 @@
-import { ADD_ITEM, DELETE_ITEM } from '../actions/types';
+import { ADD_ITEM, DELETE_ITEM, CLEAR_CART } from '../actions/types';
 
 const initialState = {
     itemList: []
@@ -18,6 +18,11 @@ const itemReducer = (state = initialState, action) => {
             return {
                 ...state,
                 itemList: state.itemList.filter(item => item.key !== action.key)
+            };
+        case CLEAR_CART: 
+            return {
+                ...state,
+                itemList: []
             };
         default:
             return state;
