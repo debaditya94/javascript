@@ -3,7 +3,6 @@ import {
     View,
     Text,
     StyleSheet,
-    ScrollView,
     Button,
     SafeAreaView,
     FlatList,
@@ -33,29 +32,36 @@ class Cart extends Component {
     render() {
         const { itemList } = this.props;
         return (
-                <SafeAreaView
-                    style={{
-                        flexGrow: 0,
-                        width: "100%",
-                        height: "100%",
-                    }}>
-                    <FlatList
-                        data={itemList}
-                        renderItem={this.renderItem}
-                        keyExtractor={item => item.key}
-                    />
-                    <View 
-                        style={{
-                            alignItems: 'center',
-                            marginBottom: "5%",
-                            zIndex: 99
-                        }}>
-                        <Button 
-                title='Place Order'
-                onPress = {() => {this.placeOrder()}}
-                > Place Order</Button>
-                    </View>
-                </SafeAreaView >
+            itemList.length > 0? <SafeAreaView
+            style={{
+                flexGrow: 0,
+                width: "100%",
+                height: "100%",
+            }}>
+            
+            <FlatList
+                data={itemList}
+                renderItem={this.renderItem}
+                keyExtractor={item => item.key}
+            />
+            <View 
+                style={{
+                    alignItems: 'center',
+                    marginBottom: "5%",
+                    zIndex: 99
+                }}>
+                <Button 
+        title='Place Order'
+        onPress = {() => {this.placeOrder()}}
+        > Place Order</Button>
+            </View>
+        </SafeAreaView >: 
+        <View style={styles.emptyCartStyle}>
+            <Text style={{fontSize: 20}}>
+                The shopping cart is currently empty !
+            </Text>
+        </View>
+                
         );
     }
 };
@@ -69,6 +75,12 @@ const styles = StyleSheet.create({
     col: {
         flex: 1,
     },
+    emptyCartStyle: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
 });
 
 const mapStateToProps = (state) => {

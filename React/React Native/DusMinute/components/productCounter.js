@@ -12,6 +12,16 @@ class ProductCounter extends React.Component {
         this.props.onChangingItemQuantity(id, quantity);
     }
 
+    decrementProductCounter = () => {
+        const id = this.props.product.id;
+        const quantity = this.props.quantity;
+        if (quantity <= 1) {
+            this.props.onRemoveItem(id);
+        } else {
+            this.props.onChangingItemQuantity(id, quantity - 1);
+        }
+    }
+
     render(){
         console.log(this.props.product);
         return (
@@ -21,7 +31,8 @@ class ProductCounter extends React.Component {
                     textAlign: 'center',
                     fontWeight: 'bold',
                     fontSize: 15
-                }}>-</Text></TouchableNativeFeedback >
+                }}
+                onPress={() => this.decrementProductCounter()}>-</Text></TouchableNativeFeedback >
                 </View>
                 <View style={styles.bordersMargin}><Text style={{
                     textAlign: 'center',
@@ -71,6 +82,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onChangingItemQuantity: (id, qty) => {
             dispatch(actions.changeItemQuantity(id, qty))
+        },
+        onRemoveItem: (key) => {
+            dispatch(actions.deleteItem(key))
         },
     }
 };

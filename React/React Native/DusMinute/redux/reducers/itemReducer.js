@@ -18,7 +18,7 @@ const itemReducer = (state = initialState, action) => {
         case DELETE_ITEM:
             return {
                 ...state,
-                itemList: state.itemList.filter(item => item.key !== action.key)
+                itemList: state.itemList.filter(prod => prod.item.item.id !== action.id)
             };
         case CLEAR_CART: 
             return {
