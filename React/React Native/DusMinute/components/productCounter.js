@@ -8,7 +8,6 @@ class ProductCounter extends React.Component {
     incrementProductCounter = () => {
         const id = this.props.product.id;
         const quantity = this.props.quantity + 1;
-        console.log('Increment quantity', id , quantity);
         this.props.onChangingItemQuantity(id, quantity);
     }
 
@@ -23,7 +22,6 @@ class ProductCounter extends React.Component {
     }
 
     render(){
-        console.log(this.props.product);
         return (
             <View style={styles.OvalShapeView}>
                 <View style={styles.bordersMargin} >

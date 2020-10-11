@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, StyleSheet, Image, View } from 'react-native';
-import { Card, Button } from 'react-native-elements';
+import { Card } from 'react-native-elements';
 import  ProductCounter  from './productCounter';
 import { BASE_URL } from '../config/Endpoint';
 

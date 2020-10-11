@@ -5,6 +5,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Products from '../screens/Products';
 import Cart from '../screens/Cart';
 import { Login } from '../screens/Login'
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-ionicons'
 
 const Stack = createStackNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -18,7 +20,12 @@ export const CreateHomeStack = () => {
                 name="Products"
                 component={Products}
                 options={{
-                    tabBarLabel: "Products"
+                    tabBarLabel: "Products",
+                    tabBarIcon: () => (
+                        // <Ionicons name={'list'} size={25} color={'gray'} />
+                        <Icon name="information-circle-outline" />
+                      )
+                    
                 }}
             >
             </BottomTabs.Screen>
@@ -26,7 +33,10 @@ export const CreateHomeStack = () => {
                 name="Cart"
                 component={Cart}
                 options={{
-                    tabBarLabel: "Cart"
+                    tabBarLabel: "Cart",
+                    tabBarIcon: () => (
+                        <Ionicons name={'cart'} size={25} color={'gray'} />
+                      )
                 }}
             >
             </BottomTabs.Screen>
@@ -56,4 +66,3 @@ export const CreateHomeStack = () => {
     );
 };
 
-// export default CreateHomeStack;
