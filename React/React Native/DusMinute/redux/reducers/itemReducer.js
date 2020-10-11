@@ -1,4 +1,5 @@
-import { ADD_ITEM, DELETE_ITEM, CLEAR_CART } from '../actions/types';
+import item from '../../components/item';
+import { ADD_ITEM, DELETE_ITEM, CLEAR_CART, CHANGE_ITEM_QUANTITY } from '../actions/types';
 
 const initialState = {
     itemList: []
@@ -23,6 +24,19 @@ const itemReducer = (state = initialState, action) => {
             return {
                 ...state,
                 itemList: []
+            };
+        case CHANGE_ITEM_QUANTITY:
+            const changedItemList = state.itemList.map((prod) => {
+                if (prod.item.item.id === action.id) {
+                    prod.item.qty = action.quantity;
+                    return prod;
+                } else {
+                    return prod;
+                }
+            })
+            return {
+                ...state,
+                itemList: changedItemList
             };
         default:
             return state;

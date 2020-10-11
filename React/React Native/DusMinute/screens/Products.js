@@ -9,7 +9,6 @@ import { connect } from 'react-redux';
 import * as actions from '../redux/actions/item';
 import Item from '../components/item';
 import * as productList from '../assets/productsList.json';
-import { BASE_URL } from '../config/Endpoint';
 
 class Products extends Component {
 
@@ -20,19 +19,10 @@ class Products extends Component {
     products = [];
     componentDidMount() {
         this.products = productList.default;
-        console.log(this.products);
-        this.products.forEach(product => {
-            product['addedToCart'] = false;
-            product.img = BASE_URL.concat(product.img);
-        });
-
-        console.log(this.products);
         this.setState({productList: this.products});
     }
     
-    addItem(product, index, productList) {
-        console.log('Product added', product);
-        productList[index].addedToCart = true;
+    addItem(product) {
         const cartItems = [...this.state.cartItems];
         const newItem = {
             item: product,
@@ -41,7 +31,6 @@ class Products extends Component {
         cartItems.push(newItem);
         this.setState({
             cartItems: cartItems,
-            productList: productList
         });
         this.props.onAddItem(newItem);
 
@@ -60,7 +49,7 @@ class Products extends Component {
                         return (
                             <View style={styles.row} key={index}>
                                 <View style={styles.col}>
-                                    <Item product={prod} clicked={() => this.addItem(prod, index, this.products)}/>
+                                    <Item product={prod} clicked={() => this.addItem(prod, index)}/>
                                 </View>
                             </View>
                         )

@@ -1,24 +1,34 @@
 import React from 'react';
 import { Text, StyleSheet, Image, View } from 'react-native';
 import { Card, Button } from 'react-native-elements';
-import { ProductCounter } from './productCounter';
+import  ProductCounter  from './productCounter';
+import { connect } from 'react-redux';
+import * as actions from '../redux/actions/item';
+import { BASE_URL } from '../config/Endpoint';
 
 class Item extends React.Component {
 
-
+    buttonComponent = () => {
+        const cartProduct = this.props.itemList.find((cartProd) => cartProd.item.item.id === this.props.product.id );
+        if (cartProduct) {
+            return (<ProductCounter product={this.props.product} quantity ={cartProduct.item.qty} style={{flex: 1, alignItems: 'center'}}/>)
+        } else {
+            return (<Button
+                title='Add to cart'
+                buttonStyle={{width: 120, marginLeft: 30, backgroundColor:'#0B504F'}}
+            onPress={this.props.clicked} 
+            />)
+        };
+    } 
     render() {
-        const buttonComponent = this.props.product.addedToCart ? (<ProductCounter quantity ={1} style={{flex: 1, alignItems: 'center'}}/>) : (<Button
-            // type="clear"
-            title='Add to cart'
-            buttonStyle={{width: 120, marginLeft: 30, backgroundColor:'#0B504F'}}
-        onPress={this.props.clicked} 
-        />);
+
+        const imgURL = BASE_URL+''+ this.props.product.img;
 
         return (
             <Card >
                 <View style={styles.cardStyle}>
                     <View>
-                        <Image source={{ uri: this.props.product.img }}
+                        <Image source={{ uri: imgURL }}
                             style={{ width: 100, height: 100 }} />
                     </View>
                     <View style={{flex: 1, alignItems: 'center'}}>
@@ -28,7 +38,7 @@ class Item extends React.Component {
                         <Text style={styles.price} h4>
                             $ {this.props.product.price}
                         </Text>
-                        {buttonComponent}
+                        {this.buttonComponent()}
                     </View>
                 </View>
             </Card>
@@ -57,4 +67,22 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Item;
+const mapStateToProps = (state) => {
+    return {
+        itemList: state.item.itemList
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onAddItem: (product) => { dispatch(actions.addItem(product)) },
+        onRemoveItem: (key) => {
+            dispatch(actions.deleteItem(key))
+        },
+        onClearCart: () => {
+            dispatch(actions.clearCart())
+        },
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Item);

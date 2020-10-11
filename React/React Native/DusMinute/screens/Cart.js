@@ -32,7 +32,6 @@ class Cart extends Component {
     }
     render() {
         const { itemList } = this.props;
-        console.log(itemList);
         return (
                 <SafeAreaView
                     style={{
@@ -40,15 +39,6 @@ class Cart extends Component {
                         width: "100%",
                         height: "100%",
                     }}>
-                    {/* {itemList.map((cartItem, index) => {
-                        return (
-                            <View style={styles.row} key={index}>
-                                <View style={styles.col}>
-                                    <CartItem product={cartItem.item} />
-                                </View>
-                            </View>
-                        )
-                    })} */}
                     <FlatList
                         data={itemList}
                         renderItem={this.renderItem}

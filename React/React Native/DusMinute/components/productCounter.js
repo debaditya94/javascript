@@ -1,30 +1,44 @@
 import React from 'react';
 import { Text, StyleSheet, View, TouchableNativeFeedback   } from 'react-native';
+import * as actions from '../redux/actions/item';
+import { connect } from 'react-redux';
 
-export const ProductCounter = (props) => {
-    return (
-        <View style={styles.OvalShapeView}>
-            <View style={styles.bordersMargin} >
+class ProductCounter extends React.Component {
+
+    incrementProductCounter = () => {
+        const id = this.props.product.id;
+        const quantity = this.props.quantity + 1;
+        console.log('Increment quantity', id , quantity);
+        this.props.onChangingItemQuantity(id, quantity);
+    }
+
+    render(){
+        console.log(this.props.product);
+        return (
+            <View style={styles.OvalShapeView}>
+                <View style={styles.bordersMargin} >
+                    <TouchableNativeFeedback  ><Text style={{
+                    textAlign: 'center',
+                    fontWeight: 'bold',
+                    fontSize: 15
+                }}>-</Text></TouchableNativeFeedback >
+                </View>
+                <View style={styles.bordersMargin}><Text style={{
+                    textAlign: 'center',
+                    fontWeight: 'bold',
+                    fontSize: 15
+                }}>{this.props.quantity}</Text></View>
+                <View style={styles.bordersMargin} >
                 <TouchableNativeFeedback  ><Text style={{
-                textAlign: 'center',
-                fontWeight: 'bold',
-                fontSize: 15
-            }}>-</Text></TouchableNativeFeedback >
+                    textAlign: 'center',
+                    fontWeight: 'bold',
+                    fontSize: 15
+                }}
+                onPress={() => this.incrementProductCounter()}>+</Text></TouchableNativeFeedback >
+                </View>
             </View>
-            <View style={styles.bordersMargin}><Text style={{
-                textAlign: 'center',
-                fontWeight: 'bold',
-                fontSize: 15
-            }}>{props.quantity}</Text></View>
-            <View style={styles.bordersMargin} >
-            <TouchableNativeFeedback  ><Text style={{
-                textAlign: 'center',
-                fontWeight: 'bold',
-                fontSize: 15
-            }}>+</Text></TouchableNativeFeedback >
-            </View>
-        </View>
-    );
+        );
+    }
 };
 
 const styles = StyleSheet.create({
@@ -47,3 +61,18 @@ const styles = StyleSheet.create({
         height: 25
     }
 });
+
+const mapStateToProps = (state) => {
+    return {
+        itemList: state.item.itemList
+    }
+};
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onChangingItemQuantity: (id, qty) => {
+            dispatch(actions.changeItemQuantity(id, qty))
+        },
+    }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(ProductCounter);
