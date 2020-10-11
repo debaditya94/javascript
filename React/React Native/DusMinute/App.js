@@ -14,6 +14,7 @@ import {
   View,
   Text,
   StatusBar,
+   LogBox
 } from 'react-native';
 
 import {
@@ -33,7 +34,7 @@ import {
 
 // import { useColorScheme, AppearanceProvider } from 'react-native-appearance';
 
-
+LogBox.ignoreAllLogs(true);
 const App = () => {
   const homeNav = () => {
     return <CreateHomeStack></CreateHomeStack>
