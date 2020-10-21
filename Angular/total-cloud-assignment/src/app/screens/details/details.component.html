@@ -8,7 +8,7 @@
             <span class="sr-only">Loading...</span>
         </div>
     </div>
-        <h5 class="user-name">{{userData.first_name}} {{userData.last_name}}</h5>
+        <h5 *ngIf="userData" class="user-name">{{userData.first_name}} {{userData.last_name}}</h5>
     <div *ngIf="userData" style="height: 80%;" fxLayout="column" fxLayoutAlign="center center" >
         <div fxFlex="40%" fxLayout="row" fxLayoutAlign="center start">
             <img fxFlex [src]="userData.avatar" style="transform: scale(1.6);" alt="...">
