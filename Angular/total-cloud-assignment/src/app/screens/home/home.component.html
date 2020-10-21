@@ -10,7 +10,8 @@
             <option value="last_name">Last Name</option>
           </select></span>
     </div>
-    <ng-container *ngFor="let user of userList">
-        <app-user-profile [user]="user"></app-user-profile>
-    </ng-container>
+        <div class="user" *ngFor="let user of userList; let i = index" [style.transform]="'translateY(' + i * 100 + '%)'">
+            <!-- <p>{{user.email}}</p> -->
+            <app-user-profile [user]="user"></app-user-profile>
+        </div>
 </div>
