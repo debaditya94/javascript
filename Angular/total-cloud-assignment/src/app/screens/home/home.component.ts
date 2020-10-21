@@ -27,7 +27,6 @@ export class HomeComponent implements OnInit {
   onSortOrderChanged(sortBy) {
     this.sortUsers(sortBy);
   }
-
   sortUsers(property) {
     this.userList.sort((a, b) => {
       if(a[property] < b[property]) return -1;

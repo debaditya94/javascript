@@ -17,12 +17,7 @@
     </div>
     <div class="jumbotron" *ngIf="userList.length > 0" style="padding-top: 1%; padding-bottom: 1%;" fxLayout="row wrap" fxLayoutAlign="start start">
         <div fxFlex="25%" class="user" *ngFor="let user of userList; let i = index">
-            <!-- <p>{{user.email}}</p> -->
-            <!-- [style.transform]="i%3 == 0 ? 'translateY(' + i * 100 + '%)' : 'translateY(0%)'" -->
-            <div>
-
-                <app-user-profile [user]="user"></app-user-profile>
-            </div>
+            <app-user-profile [user]="user"></app-user-profile>
         </div>
     </div>
 </div>
