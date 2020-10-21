@@ -1,17 +1,21 @@
-<div class="spinner-border" role="status" *ngIf="userList.length == 0">
-    <span class="sr-only">Loading...</span>
-  </div>
-<div *ngIf="userList.length > 0">
-    <div>
-        <span><label for="sort">Sort by</label></span>
-        <span><select class="custom-select" (change)="onSortOrderChanged($event.target.value)" >
-            <option value="id" selected>None</option>
-            <option value="first_name">First Name</option>
-            <option value="last_name">Last Name</option>
-          </select></span>
+<div class="container" fxLayout="row wrap">
+    <div class="spinner-border" role="status" *ngIf="userList.length == 0">
+        <span class="sr-only">Loading...</span>
     </div>
-        <div class="user" *ngFor="let user of userList; let i = index" [style.transform]="'translateY(' + i * 100 + '%)'">
+    <div class="jumbotron" *ngIf="userList.length > 0" fxLayout="row wrap" fxLayoutAlign="space-between center" >
+            <label for="sort">Sort by</label>
+            <select class="custom-select" (change)="onSortOrderChanged($event.target.value)">
+                    <option value="id" selected>None</option>
+                    <option value="first_name">First Name</option>
+                    <option value="last_name">Last Name</option>
+            </select>
+        <div fxFlex="30%" class="user" *ngFor="let user of userList; let i = index" >
             <!-- <p>{{user.email}}</p> -->
-            <app-user-profile [user]="user"></app-user-profile>
+            <!-- [style.transform]="i%3 == 0 ? 'translateY(' + i * 100 + '%)' : 'translateY(0%)'" -->
+            <div>
+
+                <app-user-profile [user]="user"></app-user-profile>
+            </div>
         </div>
+    </div>
 </div>
