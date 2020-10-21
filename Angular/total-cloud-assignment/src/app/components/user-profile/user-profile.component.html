@@ -1,8 +1,8 @@
-<div class="card user-profile">
-    <img [src]="user.avatar" class="card-img-top" alt="...">
+<div class="card user-profile" fxLayout="column" fxLayoutAlign=" center">
+    <img [src]="user.avatar" class="card-img-top img-style" alt="...">
     <div class="card-body">
-      <h5 class="card-title">{{user.first_name}}  {{user.last_name}}</h5>
-      <p class="card-text">{{user.email}}</p>
+      <h6>{{user.first_name}}  {{user.last_name}}</h6>
+      <p>{{user.email}}</p>
       <button (click)="navgateToUserDetail(user.id)" class="btn btn-primary">View Profile</button>
     </div>
   </div>

@@ -1,15 +1,19 @@
-<div class="container" fxLayout="row wrap">
-    <div class="spinner-border" role="status" *ngIf="userList.length == 0">
-        <span class="sr-only">Loading...</span>
+<div class="container">
+    <div class="vh-100" *ngIf="userList.length == 0" fxLayout="row wrap" fxLayoutAlign="center center">
+        <div class="spinner-border" role="status" >
+            <span class="sr-only">Loading...</span>
+        </div>
     </div>
-    <div class="jumbotron" *ngIf="userList.length > 0" fxLayout="row wrap" fxLayoutAlign="space-between center" >
-            <label for="sort">Sort by</label>
-            <select class="custom-select" (change)="onSortOrderChanged($event.target.value)">
-                    <option value="id" selected>None</option>
-                    <option value="first_name">First Name</option>
-                    <option value="last_name">Last Name</option>
-            </select>
-        <div fxFlex="30%" class="user" *ngFor="let user of userList; let i = index" >
+    <div fxLayout="row wrap" *ngIf="userList.length > 0">
+        <label for="sort" fxFlex="10%">Sort by</label>
+        <select fxFlex class="custom-select" style="padding-left: 1%;" (change)="onSortOrderChanged($event.target.value)">
+            <option value="id" selected>None</option>
+            <option value="first_name">First Name</option>
+            <option value="last_name">Last Name</option>
+        </select>
+    </div>
+    <div class="jumbotron" *ngIf="userList.length > 0" style="padding-top: 1%; padding-bottom: 1%;" fxLayout="row wrap" fxLayoutAlign="start start">
+        <div fxFlex="25%" class="user" *ngFor="let user of userList; let i = index">
             <!-- <p>{{user.email}}</p> -->
             <!-- [style.transform]="i%3 == 0 ? 'translateY(' + i * 100 + '%)' : 'translateY(0%)'" -->
             <div>

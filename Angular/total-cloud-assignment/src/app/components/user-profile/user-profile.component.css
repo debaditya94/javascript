@@ -1,4 +1,23 @@
 .user-profile{
-    margin-top: 5%;
     margin-bottom: 5%;
+    width: 90%;
+}
+p {
+    font-size: 12px;
+    margin-bottom: 2%;
+}
+h6 {
+    margin: 0%;
+}
+.img-style{
+    width: 60%;
+    padding: 2%; 
+}
+.card {
+    width: 77%;
+}
+.card-body {
+    width: 78%;
+    padding: 4%;
+    text-align: center;
 }
