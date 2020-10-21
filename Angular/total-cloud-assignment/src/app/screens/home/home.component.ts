@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { UserProfileFetchService } from '../../services/user-profile-fetch.service';
 
 @Component({
@@ -9,9 +8,9 @@ import { UserProfileFetchService } from '../../services/user-profile-fetch.servi
 })
 export class HomeComponent implements OnInit {
 
-  userList;
-
-  constructor(private userProfileFetchService:UserProfileFetchService, public router: Router) {
+  userList:[];
+  
+  constructor(private userProfileFetchService:UserProfileFetchService) {
     this.userList = [];
    }
 
@@ -21,11 +20,20 @@ export class HomeComponent implements OnInit {
 
   fetchUserList() {
     this.userProfileFetchService.fetchUsersList().subscribe(res => {
-        this.userList = res['data']; 
+        this.userList = res['data'];
       });
   }
-  navigateToUserDetail(user) {
-    this.router.navigate(['/details'], {queryParams: {userID : user.id}});
+
+  onSortOrderChanged(sortBy) {
+    this.sortUsers(sortBy);
+  }
+
+  sortUsers(property) {
+    this.userList.sort((a, b) => {
+      if(a[property] < b[property]) return -1;
+      else if (a[property] > b[property]) return 1;
+      else return 0;
+    });
   }
 
 }

@@ -2,7 +2,15 @@
     <span class="sr-only">Loading...</span>
   </div>
 <div *ngIf="userList.length > 0">
-    <div *ngFor="let user of userList">
-        <button (click)="navigateToUserDetail(user)">{{user.first_name}}</button>
+    <div>
+        <span><label for="sort">Sort by</label></span>
+        <span><select class="custom-select" (change)="onSortOrderChanged($event.target.value)" >
+            <option value="id" selected>None</option>
+            <option value="first_name">First Name</option>
+            <option value="last_name">Last Name</option>
+          </select></span>
     </div>
+    <ng-container *ngFor="let user of userList">
+        <app-user-profile [user]="user"></app-user-profile>
+    </ng-container>
 </div>
