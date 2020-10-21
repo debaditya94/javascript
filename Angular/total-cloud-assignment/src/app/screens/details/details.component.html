@@ -1,6 +1,29 @@
-<button (click)="navigateBackToHome()"> < Go back</button>
-<ng-container *ngIf="userData">
-    <p>{{userData.first_name}}</p>
-    <p>{{userData.last_name}}</p>
-    <p>{{userData.email}}</p>
-</ng-container>
+<div class="container vh-100" style="padding: 1%;">
+    <div fxLayout="row" fxLayoutAlign="start start">
+        <button fxFlex="10%" class="btn btn-primary" (click)="navigateBackToHome()"> < Go back</button>
+        <h4 fxFlex="90%" style="text-align: center;margin-left: -5%;">USER DETAILS</h4>
+    </div>
+    <div class="vh-100" *ngIf="!userData" fxLayout="row wrap" fxLayoutAlign="center center">
+        <div class="spinner-border" role="status" >
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+        <h5 class="user-name">{{userData.first_name}} {{userData.last_name}}</h5>
+    <div *ngIf="userData" style="height: 80%;" fxLayout="column" fxLayoutAlign="center center" >
+        <div fxFlex="40%" fxLayout="row" fxLayoutAlign="center start">
+            <img fxFlex [src]="userData.avatar" style="transform: scale(1.6);" alt="...">
+        </div>
+        <div class="details" fxFlex="8%" fxLayout="row" fxLayoutAlign="start start">
+            <label fxFlex="50%">First Name : </label>
+            <label fxFlex="50%"> <b>{{userData.first_name}}</b></label>
+        </div>
+        <div class="details" fxFlex="8%" fxLayout="row" fxLayoutAlign="start start">
+            <label fxFlex="50%">Last Name : </label>
+            <label fxFlex="50%"> <b>{{userData.last_name}}</b></label>
+        </div>
+        <div class="details" fxFlex="8%" fxLayout="row" fxLayoutAlign="start start">
+            <label fxFlex="50%">Email : </label>
+            <label fxFlex="50%"> <u>{{userData.email}}</u></label>
+        </div>
+    </div>
+</div>
