@@ -13,7 +13,6 @@ export class UserProfileComponent implements OnInit {
   constructor(public router: Router) { }
 
   ngOnInit(): void {
-    console.log(this.user);
   }
 
   navgateToUserDetail(id) {

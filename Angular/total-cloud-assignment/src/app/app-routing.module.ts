@@ -7,11 +7,13 @@ import { DetailsComponent } from './screens/details/details.component';
 const routes: Routes = [
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
+    data: { animationState: 'Home' }
   },
   {
     path: 'details',
-    component: DetailsComponent
+    component: DetailsComponent,
+    data: { animationState: 'Details' }
   },
   {
     path: '',

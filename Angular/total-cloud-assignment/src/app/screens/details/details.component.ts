@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserProfileFetchService } from 'src/app/services/user-profile-fetch.service';
 
 @Component({
@@ -11,7 +11,7 @@ export class DetailsComponent implements OnInit {
 
   userData: any;
 
-  constructor(public route: ActivatedRoute, private userProfileFetchService: UserProfileFetchService) { }
+  constructor(public router: Router, public route: ActivatedRoute, private userProfileFetchService: UserProfileFetchService) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -24,6 +24,9 @@ export class DetailsComponent implements OnInit {
     this.userProfileFetchService.fetchUserDetail(userID).subscribe(res => {
       this.userData = res['data'];
     });
+  }
+  navigateBackToHome() {
+    this.router.navigate(['/home']);
   }
 
 }
