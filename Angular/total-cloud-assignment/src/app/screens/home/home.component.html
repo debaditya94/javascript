@@ -1,1 +1,8 @@
-<p>home works!</p>
+<div class="spinner-border" role="status" *ngIf="userList.length == 0">
+    <span class="sr-only">Loading...</span>
+  </div>
+<div *ngIf="userList.length > 0">
+    <div *ngFor="let user of userList">
+        <button (click)="navigateToUserDetail(user)">{{user.first_name}}</button>
+    </div>
+</div>
