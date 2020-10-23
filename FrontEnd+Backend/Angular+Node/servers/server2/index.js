@@ -1,13 +1,18 @@
 const { setInterval } = require('timers');
-
-const app = require('express')();
+const bodyParser = require('body-parser');
+const express = require('express');
+const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 
-app.get('/', (req, res) => {
-    res.send('<h1>Hey Socket.io</h1>');
-});
+const PORT = 5678;
 
+app.use(bodyParser.json());
+// app.use(express.static(process.cwd()+"/location-dashboard/dist/location-dashboard/"));
+
+app.get('/', (req, res) => {
+    res.send(`<h1>Socket running at port ${PORT}</h1>`);
+});
 function calculateLocation(location) {
     const dx = parseFloat(((0.5 - Math.random())*0.001).toFixed(4));
     const dy = parseFloat(((0.5 - Math.random())*0.001).toFixed(4));
@@ -37,6 +42,6 @@ io.on('connection', socket => {
     });
 });
 
-http.listen(3000, () => {
-    console.log('listening on port 3000');
+http.listen(PORT, () => {
+    console.log('listening on port '+ PORT);
 });

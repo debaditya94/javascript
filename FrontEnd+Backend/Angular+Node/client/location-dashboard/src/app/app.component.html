@@ -12,8 +12,8 @@
     <a class="nav-link heading" href="#">Last Updated</a>
   </li>
 </ul>
-<ng-conatiner *ngIf="cars.length > 0">
-  <ul class="nav navbar"  *ngFor="let car of cars">
+<ng-conatiner *ngIf="cars">
+  <ul class="nav navbar"  *ngFor="let car in cars | keyvalue">
     <li class="nav-item" >
       <p class="nav-link" href="#">{{car.name}}</p>
     </li>
