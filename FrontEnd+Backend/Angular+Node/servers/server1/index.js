@@ -31,7 +31,6 @@ function locationUpdate(socket, location) {
 }
 
 io.on('connection', socket => {
-    console.log('a client connected');
     const location = {
         initial_latitude : 48.8581824,
         initial_longitude : 2.212730400000055,
@@ -39,10 +38,8 @@ io.on('connection', socket => {
     };
     locationUpdate(socket, location);
     socket.on('disconnect', () => {
-        console.log('client disconnected');
     });
 });
 
 http.listen(PORT, () => {
-    console.log('listening on port '+ PORT);
 });
