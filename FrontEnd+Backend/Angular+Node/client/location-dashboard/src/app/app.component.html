@@ -1,0 +1,30 @@
+<ul class="nav navbar titleBar">
+  <li class="nav-item">
+    <a class="nav-link heading" href="#">Name</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link heading" href="#">Latitude</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link heading" href="#">Longitude</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link heading" href="#">Last Updated</a>
+  </li>
+</ul>
+<ng-conatiner *ngIf="cars.length > 0">
+  <ul class="nav navbar"  *ngFor="let car of cars">
+    <li class="nav-item" >
+      <p class="nav-link" href="#">{{car.name}}</p>
+    </li>
+    <li class="nav-item" >
+      <p class="nav-link" href="#">{{car.latitude}}</p>
+    </li>
+    <li class="nav-item" >
+      <p class="nav-link" href="#">{{car.longitude}}</p>
+    </li>
+    <li class="nav-item" >
+      <p class="nav-link" href="#">{{car.lastUpdated | date:'medium'}}</p>
+    </li>
+  </ul>
+</ng-conatiner>
