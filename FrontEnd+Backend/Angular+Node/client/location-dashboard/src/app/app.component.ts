@@ -8,7 +8,7 @@ import { SocketioService } from './socketio.service';
 })
 export class AppComponent {
   title = 'location-dashboard';
-  cars = {};
+  cars = [{}, {}, {}];
   constructor(private socketService:SocketioService) {};
 
   ngOnInit() {
