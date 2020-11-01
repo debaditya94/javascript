@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+    movies:
+        build: ./server
+        ports:
+            - '3000:3000'
+    dashboard:
+        container_name: movies-dashboard
+        build: ./client/movie-dashboard
+        ports: 
+            - '3001:3001'
