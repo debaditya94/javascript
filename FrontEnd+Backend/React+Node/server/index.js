@@ -2,20 +2,39 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const url = "https://www.imdb.com/search/title/?count=100&groups=top_1000&sort=user_rating";
 const fs = require('fs');
+const bodyParser = require('body-parser');
+const express = require('express');
+const app = express();
+const http = require('http').createServer(app);
+
+app.use(bodyParser.json());
 
 fetchData(url).then( (res) => {
     const html = res.data;
     const $ = cheerio.load(html);
     const moviesList = $('body > #wrapper > #root > .pagecontent > .redesign > #main > .article > .lister.list.detail.sub-list > .lister-list > .lister-item.mode-advanced');
     const moviesListData = [];
-    moviesList.each(function() {
+    moviesList.each((index, elem) => {
         // console.log(this);
-        const title = $(this).find("div[class='lister-item-content'] > h3[class='lister-item-header'] > a").text().trim();
+        const title = $(elem).find("div[class='lister-item-content'] > h3[class='lister-item-header'] > a").text().trim();
+        const releaseYear = $(elem).find("div[class='lister-item-content'] > h3[class='lister-item-header'] > span[class='lister-item-year text-muted unbold']").text().replace('(', ' ').replace(')', ' ').trim();
+        const pgRating = $(elem).find("div[class='lister-item-content'] > p[class='text-muted '] > span[class='certificate']").text().trim();
+        const genre = $(elem).find("div[class='lister-item-content'] > p[class='text-muted '] > span[class='genre']").text().trim();
+        const runningTime = $(elem).find("div[class='lister-item-content'] > p[class='text-muted '] > span[class='runtime']").text().trim();
+        const imdbRating = $(elem).find("div[class='lister-item-content'] > div[class='ratings-bar'] > div[class='inline-block ratings-imdb-rating'] > strong").text().trim();
+        const metaScore = $(elem).find("div[class='lister-item-content'] > div[class='ratings-bar'] > div[class='inline-block ratings-metascore'] > span[class='metascore  favorable']").text().trim();
+        const description = $(elem).find("div[class='lister-item-content'] > p[class='text-muted']").text().trim();
         const movieInfo = {
-            title: title
+            title,
+            releaseYear,
+            genre,
+            runningTime,
+            pgRating,
+            imdbRating,
+            metaScore,
+            description
         };
         moviesListData.push(movieInfo);
-        console.log(title);
     });
     const fileData = JSON.stringify(moviesListData, null, 2);
     fs.writeFile('movie-list.json', fileData, (err) => {
@@ -35,3 +54,11 @@ async function fetchData(url){
     }
     return response;
 }
+
+app.get('/', (req, res) => {
+    res.send(`<h1>Server running at port 3000</h1>`);
+});
+
+http.listen(3000, () => {
+    console.log('Server running at port 3000');
+});
