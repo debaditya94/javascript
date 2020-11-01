@@ -6,8 +6,11 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 const http = require('http').createServer(app);
+const cors = require('cors');
+const moviesData = require('./movie-list.json');
 
 app.use(bodyParser.json());
+app.use(cors());
 
 fetchData(url).then( (res) => {
     const html = res.data;
@@ -15,7 +18,6 @@ fetchData(url).then( (res) => {
     const moviesList = $('body > #wrapper > #root > .pagecontent > .redesign > #main > .article > .lister.list.detail.sub-list > .lister-list > .lister-item.mode-advanced');
     const moviesListData = [];
     moviesList.each((index, elem) => {
-        // console.log(this);
         const title = $(elem).find("div[class='lister-item-content'] > h3[class='lister-item-header'] > a").text().trim();
         const releaseYear = $(elem).find("div[class='lister-item-content'] > h3[class='lister-item-header'] > span[class='lister-item-year text-muted unbold']").text().replace('(', ' ').replace(')', ' ').trim();
         const pgRating = $(elem).find("div[class='lister-item-content'] > p[class='text-muted '] > span[class='certificate']").text().trim();
@@ -57,6 +59,20 @@ async function fetchData(url){
 
 app.get('/', (req, res) => {
     res.send(`<h1>Server running at port 3000</h1>`);
+});
+
+app.get('/movieList', (req, res) => {
+    try{
+        const queryList = req.query;
+        let filteredMovies = [...moviesData];
+        for (let key in queryList) {
+            filteredMovies = filteredMovies.filter(movie => movie[key] == queryList[key]);
+        };
+        res.json(filteredMovies);
+    }
+    catch(err) {
+        res.send('Error fetching data!')
+    }
 });
 
 http.listen(3000, () => {
