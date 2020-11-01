@@ -28,12 +28,12 @@ fetchData(url).then( (res) => {
         const description = $(elem).find("div[class='lister-item-content'] > p[class='text-muted']").text().trim();
         const movieInfo = {
             title,
-            releaseYear,
-            genre,
+            releaseYear : parseInt(releaseYear),
+            genre: genre.split(', '),
             runningTime,
             pgRating,
-            imdbRating,
-            metaScore,
+            imdbRating : parseFloat(imdbRating),
+            metaScore : parseFloat(metaScore),
             description
         };
         moviesListData.push(movieInfo);
@@ -66,12 +66,47 @@ app.get('/movieList', (req, res) => {
         const queryList = req.query;
         let filteredMovies = [...moviesData];
         for (let key in queryList) {
-            filteredMovies = filteredMovies.filter(movie => movie[key] == queryList[key]);
+
+            if (key == 'genre') filteredMovies = filteredMovies.filter(movie => movie.genre.indexOf(queryList[key]) != -1);
+            else filteredMovies = filteredMovies.filter(movie => movie[key] == queryList[key]);
         };
         res.json(filteredMovies);
     }
     catch(err) {
         res.send('Error fetching data!')
+    }
+});
+
+app.get('/filterParams', (req, res) => {
+    try{
+        const filteredMovies = [...moviesData];
+        const titleList = [...new Set(filteredMovies.map(movie => movie.title).sort())];
+        const runningTimeList = [...new Set(filteredMovies.map(movie => movie.runningTime).sort((a, b) => {
+            const duration1 = a.split(" ")[0];
+            const duration2 = b.split(" ")[0];
+            return duration1 - duration2;
+        }))];
+        const pgRatingList = [...new Set(filteredMovies.map(movie => movie.pgRating).sort())];
+        const releaseYearList = [...new Set(filteredMovies.map(movie => movie.releaseYear).sort())];
+        const imdbRatingList = [...new Set(filteredMovies.map(movie => movie.imdbRating).sort())];
+        const metaScoreList = [...new Set(filteredMovies.map(movie => movie.metaScore).sort())];
+        
+        let genreList = [];
+        filteredMovies.forEach(movie => genreList = genreList.concat(movie.genre));
+        genreList = [...new Set(genreList.sort())];
+        const filterValues = {
+            titleList,
+            runningTimeList,
+            pgRatingList,
+            releaseYearList,
+            imdbRatingList,
+            metaScoreList,
+            genreList
+        }
+        res.json(filterValues);
+    }
+    catch(err) {
+        res.send('Error fetching filter values!')
     }
 });
 
