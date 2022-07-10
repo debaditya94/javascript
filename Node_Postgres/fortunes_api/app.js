@@ -13,7 +13,6 @@ app.get('/fortunes', (req, res) => {
 });
 
 app.get('/fortunes/random', (req, res) => {
-
     res.json(fortunes[Math.floor(Math.random() * fortunes.length)]);
 
 });
